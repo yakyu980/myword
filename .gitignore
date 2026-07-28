@@ -3,12 +3,14 @@ node_modules/
 
 # ── תוצרי בנייה (‏1GB — נבנים מחדש בכל build) ──
 desktop/dist/
-desktop/renderer/index.html      # מסונכרן אוטומטית מ-MyWord-v2.html
+# renderer/index.html מסונכרן אוטומטית מ-MyWord-v2.html — אל תעריך ידנית
+desktop/renderer/index.html
 
 # ── תוצרי בדיקות (‏875MB צילומי מסך) ──
 qa/screenshots/
 qa/reports/
-qa/_*.mjs                        # סקריפטי בדיקה זמניים
+# סקריפטי בדיקה זמניים (nameing convention: _*.mjs)
+qa/_*.mjs
 qa/*.log
 
 # ── גיבויים מקומיים (96MB — לא נחוצים בהיסטוריית git) ──
