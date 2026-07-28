@@ -4,7 +4,7 @@
   "version": "2.0.0",
   "description": "עורך מסמכים בעברית — MyWord",
   "homepage": "https://github.com/yakyu980/myword",
-  "author": { "name": "MyWord" },
+  "author": { "name": "MyWord", "email": "yakyu980@gmail.com" },
   "main": "main.js",
   "scripts": {
     "sync": "node sync-renderer.mjs",
@@ -57,7 +57,9 @@
       "category": "Office",
       "icon": "build/icon.png",
       "artifactName": "MyWord-${version}.${ext}",
-      "desktop": { "Name": "MyWord", "Comment": "עורך מסמכים בעברית" }
+      "desktop": { "Name": "MyWord", "Comment": "עורך מסמכים בעברית" },
+      "maintainer": "MyWord <yakyu980@gmail.com>",
+      "vendor": "MyWord"
     },
     "nsis": {
       "artifactName": "MyWord-Setup-${version}.${ext}",
