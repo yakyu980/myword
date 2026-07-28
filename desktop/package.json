@@ -3,6 +3,7 @@
   "productName": "MyWord",
   "version": "2.0.0",
   "description": "עורך מסמכים בעברית — MyWord",
+  "homepage": "https://github.com/yakyu980/myword",
   "author": { "name": "MyWord" },
   "main": "main.js",
   "scripts": {
@@ -46,7 +47,7 @@
       "hardenedRuntime": true,
       "gatekeeperAssess": false
     },
-    "dmg": { "title": "MyWord ${version}" },
+    "dmg": { "title": "MyWord ${version} ${arch}" },
     "linux": {
       "target": [
         { "target": "AppImage", "arch": ["x64"] },
