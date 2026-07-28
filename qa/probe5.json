@@ -1,0 +1,358 @@
+[
+  {
+    "mode": "mouse",
+    "vp": "390x844",
+    "out": [
+      {
+        "test": "Bold",
+        "btn": {
+          "x": 352,
+          "y": 503,
+          "w": 38
+        },
+        "hit": {
+          "tag": "path",
+          "inBtn": true
+        },
+        "execCalled": [],
+        "applied": false,
+        "htmlChanged": false
+      },
+      {
+        "test": "Italic",
+        "btn": {
+          "x": 313,
+          "y": 503,
+          "w": 38
+        },
+        "hit": {
+          "tag": "line",
+          "inBtn": true
+        },
+        "execCalled": [
+          "bold"
+        ],
+        "applied": false,
+        "htmlChanged": true
+      },
+      {
+        "test": "Underline",
+        "btn": {
+          "x": 271,
+          "y": 503,
+          "w": 38
+        },
+        "hit": {
+          "tag": "svg",
+          "inBtn": true
+        },
+        "execCalled": [
+          "italic"
+        ],
+        "applied": false,
+        "htmlChanged": true
+      },
+      {
+        "test": "Strike",
+        "btn": {
+          "x": 229,
+          "y": 503,
+          "w": 38
+        },
+        "hit": {
+          "tag": "line",
+          "inBtn": true
+        },
+        "execCalled": [
+          "underline"
+        ],
+        "applied": false,
+        "htmlChanged": true
+      },
+      {
+        "test": "AlignCenter",
+        "btn": {
+          "x": 266,
+          "y": 545,
+          "w": 38
+        },
+        "hit": {
+          "tag": "line",
+          "inBtn": true
+        },
+        "execCalled": [
+          "justifyRight"
+        ],
+        "applied": false,
+        "htmlChanged": false
+      }
+    ]
+  },
+  {
+    "mode": "touch",
+    "vp": "390x844",
+    "out": [
+      {
+        "test": "Bold",
+        "btn": {
+          "x": 352,
+          "y": 503,
+          "w": 38
+        },
+        "hit": {
+          "tag": "path",
+          "inBtn": true
+        },
+        "execCalled": [],
+        "applied": false,
+        "htmlChanged": false
+      },
+      {
+        "test": "Italic",
+        "btn": {
+          "x": 313,
+          "y": 503,
+          "w": 38
+        },
+        "hit": {
+          "tag": "line",
+          "inBtn": true
+        },
+        "execCalled": [
+          "bold"
+        ],
+        "applied": false,
+        "htmlChanged": true
+      },
+      {
+        "test": "Underline",
+        "btn": {
+          "x": 271,
+          "y": 503,
+          "w": 38
+        },
+        "hit": {
+          "tag": "svg",
+          "inBtn": true
+        },
+        "execCalled": [
+          "italic"
+        ],
+        "applied": false,
+        "htmlChanged": true
+      },
+      {
+        "test": "Strike",
+        "btn": {
+          "x": 229,
+          "y": 503,
+          "w": 38
+        },
+        "hit": {
+          "tag": "line",
+          "inBtn": true
+        },
+        "execCalled": [
+          "underline"
+        ],
+        "applied": false,
+        "htmlChanged": true
+      },
+      {
+        "test": "AlignCenter",
+        "btn": {
+          "x": 266,
+          "y": 545,
+          "w": 38
+        },
+        "hit": {
+          "tag": "line",
+          "inBtn": true
+        },
+        "execCalled": [
+          "justifyRight"
+        ],
+        "applied": false,
+        "htmlChanged": false
+      }
+    ]
+  },
+  {
+    "mode": "mouse",
+    "vp": "360x740",
+    "out": [
+      {
+        "test": "Bold",
+        "btn": {
+          "x": 315,
+          "y": 503,
+          "w": 38
+        },
+        "hit": {
+          "tag": "path",
+          "inBtn": true
+        },
+        "execCalled": [],
+        "applied": false,
+        "htmlChanged": true
+      },
+      {
+        "test": "Italic",
+        "btn": {
+          "x": 273,
+          "y": 503,
+          "w": 38
+        },
+        "hit": {
+          "tag": "line",
+          "inBtn": true
+        },
+        "execCalled": [
+          "bold"
+        ],
+        "applied": false,
+        "htmlChanged": true
+      },
+      {
+        "test": "Underline",
+        "btn": {
+          "x": 231,
+          "y": 503,
+          "w": 38
+        },
+        "hit": {
+          "tag": "svg",
+          "inBtn": true
+        },
+        "execCalled": [
+          "italic"
+        ],
+        "applied": false,
+        "htmlChanged": true
+      },
+      {
+        "test": "Strike",
+        "btn": {
+          "x": 189,
+          "y": 503,
+          "w": 38
+        },
+        "hit": {
+          "tag": "line",
+          "inBtn": true
+        },
+        "execCalled": [
+          "underline"
+        ],
+        "applied": false,
+        "htmlChanged": true
+      },
+      {
+        "test": "AlignCenter",
+        "btn": {
+          "x": 226,
+          "y": 545,
+          "w": 38
+        },
+        "hit": {
+          "tag": "line",
+          "inBtn": true
+        },
+        "execCalled": [
+          "justifyRight"
+        ],
+        "applied": false,
+        "htmlChanged": false
+      }
+    ]
+  },
+  {
+    "mode": "touch",
+    "vp": "360x740",
+    "out": [
+      {
+        "test": "Bold",
+        "btn": {
+          "x": 315,
+          "y": 503,
+          "w": 38
+        },
+        "hit": {
+          "tag": "path",
+          "inBtn": true
+        },
+        "execCalled": [],
+        "applied": false,
+        "htmlChanged": true
+      },
+      {
+        "test": "Italic",
+        "btn": {
+          "x": 273,
+          "y": 503,
+          "w": 38
+        },
+        "hit": {
+          "tag": "line",
+          "inBtn": true
+        },
+        "execCalled": [
+          "bold"
+        ],
+        "applied": false,
+        "htmlChanged": true
+      },
+      {
+        "test": "Underline",
+        "btn": {
+          "x": 231,
+          "y": 503,
+          "w": 38
+        },
+        "hit": {
+          "tag": "svg",
+          "inBtn": true
+        },
+        "execCalled": [
+          "italic"
+        ],
+        "applied": false,
+        "htmlChanged": true
+      },
+      {
+        "test": "Strike",
+        "btn": {
+          "x": 189,
+          "y": 503,
+          "w": 38
+        },
+        "hit": {
+          "tag": "line",
+          "inBtn": true
+        },
+        "execCalled": [
+          "underline"
+        ],
+        "applied": false,
+        "htmlChanged": true
+      },
+      {
+        "test": "AlignCenter",
+        "btn": {
+          "x": 226,
+          "y": 545,
+          "w": 38
+        },
+        "hit": {
+          "tag": "line",
+          "inBtn": true
+        },
+        "execCalled": [
+          "justifyRight"
+        ],
+        "applied": false,
+        "htmlChanged": false
+      }
+    ]
+  }
+]

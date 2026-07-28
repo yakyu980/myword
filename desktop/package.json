@@ -1,0 +1,78 @@
+{
+  "name": "myword",
+  "productName": "MyWord",
+  "version": "2.0.0",
+  "description": "עורך מסמכים בעברית — MyWord",
+  "author": { "name": "MyWord" },
+  "main": "main.js",
+  "scripts": {
+    "sync": "node sync-renderer.mjs",
+    "start": "npm run sync && electron .",
+    "dist": "npm run sync && electron-builder --win",
+    "dist:portable": "npm run sync && electron-builder --win portable",
+    "dist:linux": "npm run sync && electron-builder --linux tar.gz",
+    "dist:linux:full": "npm run sync && electron-builder --linux",
+    "dist:mac": "npm run sync && electron-builder --mac",
+    "dist:all": "npm run sync && electron-builder -wml"
+  },
+  "devDependencies": {
+    "electron": "^33.2.0",
+    "electron-builder": "^25.1.8"
+  },
+  "build": {
+    "appId": "com.myword.editor",
+    "productName": "MyWord",
+    "directories": { "output": "dist", "buildResources": "build" },
+    "files": ["main.js", "preload.js", "renderer/**", "package.json"],
+    "win": {
+      "target": [
+        { "target": "nsis", "arch": ["x64"] },
+        { "target": "portable", "arch": ["x64"] }
+      ],
+      "artifactName": "MyWord-${version}.${ext}"
+    },
+    "portable": {
+      "artifactName": "MyWord-Portable-${version}.${ext}"
+    },
+    "mac": {
+      "target": [
+        { "target": "dmg", "arch": ["x64", "arm64"] },
+        { "target": "zip", "arch": ["x64", "arm64"] }
+      ],
+      "category": "public.app-category.productivity",
+      "artifactName": "MyWord-${version}-${arch}.${ext}",
+      "icon": "build/icon.png",
+      "hardenedRuntime": true,
+      "gatekeeperAssess": false
+    },
+    "dmg": { "title": "MyWord ${version}" },
+    "linux": {
+      "target": [
+        { "target": "AppImage", "arch": ["x64"] },
+        { "target": "deb", "arch": ["x64"] },
+        { "target": "tar.gz", "arch": ["x64"] }
+      ],
+      "category": "Office",
+      "icon": "build/icon.png",
+      "artifactName": "MyWord-${version}.${ext}",
+      "desktop": { "Name": "MyWord", "Comment": "עורך מסמכים בעברית" }
+    },
+    "nsis": {
+      "artifactName": "MyWord-Setup-${version}.${ext}",
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "MyWord",
+      "language": "1037"
+    },
+    "fileAssociations": [
+      {
+        "ext": "mwd",
+        "name": "MyWord Document",
+        "description": "מסמך MyWord",
+        "role": "Editor"
+      }
+    ]
+  }
+}

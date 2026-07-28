@@ -1,0 +1,16 @@
+{
+  "name": "myword-qa-marcus",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "מרקוס וורד — סוכן QA אוטומטי ל-MyWord v2 (Playwright + Supabase)",
+  "scripts": {
+    "marcus": "node marcus.mjs",
+    "marcus:headed": "node marcus.mjs --headed",
+    "marcus:local": "node marcus.mjs --no-supabase"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.45.0",
+    "playwright": "^1.60.0"
+  }
+}

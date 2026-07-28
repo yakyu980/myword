@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<title>MyWord — Premium Glassmorphism Mockup v1</title>
+<style>
+  :root{
+    --c1:#001D39;
+    --c2:#0A4174;
+    --c3:#49769F;
+    --c4:#4E8EA2;
+    --c5:#6EA2B3;
+    --c6:#7BBDE8;
+    --c7:#BDD8E9;
+    --glass-bg: rgba(255,255,255,0.10);
+    --glass-bg-strong: rgba(255,255,255,0.16);
+    --glass-border: rgba(255,255,255,0.28);
+    --glass-hl: rgba(255,255,255,0.45);
+  }
+  *{box-sizing:border-box;}
+  html,body{
+    margin:0; padding:0; height:100%;
+    font-family: "Segoe UI", Arial, sans-serif;
+    overflow:hidden;
+  }
+  body{
+    background:
+      radial-gradient(1000px 700px at 78% 10%, rgba(123,189,232,0.28), transparent 60%),
+      radial-gradient(900px 700px at 10% 85%, rgba(78,142,162,0.30), transparent 60%),
+      radial-gradient(700px 600px at 85% 80%, rgba(110,162,179,0.22), transparent 55%),
+      radial-gradient(1200px 900px at 15% 15%, rgba(189,216,233,0.14), transparent 55%),
+      linear-gradient(135deg, var(--c1) 0%, var(--c2) 100%);
+    position:relative;
+  }
+  .wave-layer{
+    position:absolute; inset:0; z-index:0; pointer-events:none;
+    filter: blur(60px);
+    opacity:0.6;
+  }
+  .wave{
+    position:absolute; border-radius:50%;
+    background: radial-gradient(circle, rgba(123,189,232,0.55), transparent 70%);
+  }
+  .w1{ width:900px; height:400px; left:-150px; top:60%; }
+  .w2{ width:1100px; height:450px; right:-200px; top:5%; background: radial-gradient(circle, rgba(189,216,233,0.4), transparent 70%);}
+  .w3{ width:700px; height:700px; right:10%; bottom:-200px; background: radial-gradient(circle, rgba(78,142,162,0.45), transparent 70%);}
+
+  .stage{
+    position:relative; z-index:1;
+    width:100%; height:100vh;
+    display:flex; flex-direction:column;
+  }
+
+  .ribbon{
+    height:84px;
+    margin:46px 84px 0 14px;
+    border-radius:18px;
+    background: var(--glass-bg);
+    border:1px solid var(--glass-border);
+    backdrop-filter: blur(18px) saturate(160%);
+    -webkit-backdrop-filter: blur(18px) saturate(160%);
+    box-shadow: inset 0 1px 0 var(--glass-hl), 0 8px 30px rgba(0,10,30,0.35);
+    display:flex; align-items:center;
+    padding:0 18px;
+    gap:16px;
+    color:#eaf4ff;
+    position:relative;
+  }
+  .tabs{
+    display:flex; gap:8px; position:absolute; top:-32px; right:100px;
+  }
+  .tab{
+    padding:9px 22px; font-size:15px; font-weight:600; border-radius:12px 12px 0 0;
+    color:#cfe6f9; background: rgba(255,255,255,0.07);
+    letter-spacing:.2px; cursor:pointer;
+    transition: background .15s ease, color .15s ease;
+  }
+  .tab:hover{ background: rgba(255,255,255,0.14); color:#fff; }
+  .tab.active{
+    background: linear-gradient(180deg, #7BBDE8, #4E8EA2);
+    color:#04202f; font-weight:800;
+    box-shadow: 0 -4px 18px rgba(123,189,232,0.6), inset 0 1px 0 rgba(255,255,255,0.6);
+  }
+  .group{
+    display:flex; flex-direction:column; align-items:center; gap:4px;
+    padding:8px 14px; border-radius:14px;
+    background: rgba(255,255,255,0.06);
+    border:1px solid rgba(255,255,255,0.14);
+  }
+  .rows{ display:flex; gap:8px; }
+  .ic-tile{
+    width:32px; height:32px; border-radius:9px;
+    background: linear-gradient(160deg, rgba(255,255,255,0.35), rgba(255,255,255,0.05));
+    border:1px solid rgba(255,255,255,0.35);
+    box-shadow: inset 0 1px 2px rgba(255,255,255,0.5), 0 4px 10px rgba(0,10,25,0.35);
+    display:flex; align-items:center; justify-content:center;
+    font-size:13px; color:#eaf6ff;
+    cursor:pointer;
+    transition: transform .15s ease, box-shadow .15s ease;
+    overflow:hidden;
+  }
+  .ic-tile img{ width:86%; height:86%; object-fit:contain; mix-blend-mode:screen; }
+  .ic-tile:hover{
+    transform: translateY(-2px);
+    box-shadow: inset 0 1px 2px rgba(255,255,255,0.6), 0 6px 16px rgba(123,189,232,0.55), 0 0 18px rgba(123,189,232,0.4);
+  }
+  .glabel{ font-size:10px; color:#bcdcf3; }
+
+  .middle{
+    flex:1; display:flex; position:relative; overflow:hidden;
+  }
+
+  .canvas-area{
+    flex:1; display:flex; justify-content:center; align-items:flex-start;
+    padding-top:36px; overflow:auto;
+    position:relative;
+  }
+
+  .a4-page{
+    width:540px; height:763px;
+    background:#fff;
+    border-radius:3px;
+    box-shadow: 0 30px 60px rgba(0,10,30,0.45), 0 6px 18px rgba(0,10,30,0.3);
+    padding:60px;
+    color:#222;
+    font-size:14px;
+    line-height:1.6;
+  }
+  .a4-page h1{ font-size:20px; margin:0 0 14px; color:#0A4174; }
+  .a4-page p{ margin:0 0 10px; color:#333; }
+
+  .sidebar{
+    width:58px;
+    margin:14px 14px 14px 0;
+    border-radius:18px;
+    background: var(--glass-bg);
+    border:1px solid var(--glass-border);
+    backdrop-filter: blur(18px) saturate(160%);
+    -webkit-backdrop-filter: blur(18px) saturate(160%);
+    box-shadow: inset 0 1px 0 var(--glass-hl), 0 8px 30px rgba(0,10,30,0.35);
+    display:flex; flex-direction:column; align-items:stretch;
+    padding:0; gap:0;
+    overflow:hidden;
+    position:absolute; right:14px; top:0; bottom:0;
+  }
+  .sb-logo{
+    width:56px; height:56px; border-radius:50%;
+    background: conic-gradient(from 200deg, #7BBDE8, #0A4174, #BDD8E9, #4E8EA2, #7BBDE8);
+    border:2px solid rgba(255,255,255,0.5);
+    box-shadow: 0 0 14px rgba(123,189,232,0.6);
+    display:flex; align-items:center; justify-content:center;
+    font-weight:700; color:#fff; font-size:16px;
+    margin:12px auto 14px;
+    flex-shrink:0;
+  }
+  .sb-spacer{ flex:1; }
+  .sb-ic{
+    width:100%; height:58px; border-radius:0;
+    background: linear-gradient(160deg, rgba(255,255,255,0.14), rgba(255,255,255,0.02));
+    border:0; border-bottom:1px solid rgba(255,255,255,0.14);
+    box-shadow: none;
+    display:flex; align-items:center; justify-content:center;
+    color:#eaf6ff; font-size:16px; cursor:pointer;
+    overflow:hidden;
+    flex-shrink:0;
+    transition: background .15s ease;
+  }
+  .sb-ic:hover{ background: linear-gradient(160deg, rgba(255,255,255,0.26), rgba(255,255,255,0.05)); box-shadow:none; }
+  .sb-ic img{ width:64%; height:64%; object-fit:contain; mix-blend-mode:screen; }
+  .sb-logo img{ width:100%; height:100%; object-fit:cover; border-radius:50%; }
+
+  .floatbar{
+    position:absolute; bottom:60px; left:50%; transform:translateX(-50%);
+    background: var(--glass-bg-strong);
+    border:1px solid var(--glass-border);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border-radius:20px;
+    box-shadow: inset 0 1px 0 var(--glass-hl), 0 14px 40px rgba(0,10,30,0.45);
+    padding:10px 16px;
+    display:flex; flex-direction:column; gap:8px;
+    align-items:center;
+  }
+  .fb-row{ display:flex; gap:8px; align-items:center; }
+  .fb-ic{
+    width:36px; height:36px; border-radius:10px;
+    background: linear-gradient(160deg, rgba(255,255,255,0.3), rgba(255,255,255,0.04));
+    border:1px solid rgba(255,255,255,0.3);
+    display:flex; align-items:center; justify-content:center;
+    color:#eaf6ff; font-size:15px; cursor:pointer;
+    overflow:hidden;
+  }
+  .fb-ic img{ width:80%; height:80%; object-fit:contain; mix-blend-mode:screen; }
+  .fb-main{
+    width:52px; height:52px; border-radius:50%;
+    margin-top:-30px;
+    background: linear-gradient(160deg, #7BBDE8, #0A4174);
+    border:2px solid rgba(255,255,255,0.55);
+    box-shadow: 0 8px 24px rgba(123,189,232,0.6), inset 0 1px 2px rgba(255,255,255,0.6);
+    display:flex; align-items:center; justify-content:center;
+    color:#fff; font-size:20px; cursor:pointer;
+  }
+</style>
+</head>
+<body>
+  <div class="wave-layer">
+    <div class="wave w1"></div>
+    <div class="wave w2"></div>
+    <div class="wave w3"></div>
+  </div>
+
+  <div class="stage">
+    <div class="ribbon">
+      <div class="tabs">
+        <div class="tab">קובץ</div>
+        <div class="tab active">בית</div>
+        <div class="tab">הוספה</div>
+        <div class="tab">פריסה</div>
+        <div class="tab">כלים</div>
+        <div class="tab">תצוגה</div>
+      </div>
+
+      <div class="group">
+        <div class="rows">
+          <div class="ic-tile" title="שמור"><img src="assets/icon-save.png" alt=""></div>
+          <div class="ic-tile" title="בטל">↺</div>
+          <div class="ic-tile" title="חזור">↻</div>
+        </div>
+        <div class="glabel">קובץ</div>
+      </div>
+
+      <div class="group">
+        <div class="rows">
+          <div class="ic-tile" title="מודגש"><img src="assets/icon-bold.png" alt=""></div>
+          <div class="ic-tile" title="נטוי"><img src="assets/icon-italic.png" alt=""></div>
+          <div class="ic-tile" title="קו תחתון">U</div>
+        </div>
+        <div class="glabel">גופן</div>
+      </div>
+
+      <div class="group">
+        <div class="rows">
+          <div class="ic-tile" title="יישור ימין"><img src="assets/icon-alignright.png" alt=""></div>
+          <div class="ic-tile" title="מרכוז"><img src="assets/icon-aligncenter.png" alt=""></div>
+          <div class="ic-tile" title="יישור שמאל"><img src="assets/icon-alignleft.png" alt=""></div>
+        </div>
+        <div class="glabel">פסקה</div>
+      </div>
+
+      <div class="group">
+        <div class="rows">
+          <div class="ic-tile" title="RTL/LTR">⇋</div>
+          <div class="ic-tile" title="Dark mode"><img src="assets/icon-darkmode.png" alt=""></div>
+        </div>
+        <div class="glabel">תצוגה</div>
+      </div>
+    </div>
+
+    <div class="middle">
+      <div class="sidebar">
+        <div class="sb-logo"><img src="assets/logo-final.png" alt="MyWord"></div>
+        <div class="sb-ic" title="קובץ חדש"><img src="assets/icon-newfile.png" alt=""></div>
+        <div class="sb-ic" title="פתח"><img src="assets/icon-open.png" alt=""></div>
+        <div class="sb-ic" title="שמור"><img src="assets/icon-save.png" alt=""></div>
+        <div class="sb-ic" title="ייצוא PDF"><img src="assets/icon-exportpdf.png" alt=""></div>
+        <div class="sb-spacer"></div>
+        <div class="sb-ic" title="RTL/LTR">⇋</div>
+        <div class="sb-ic" title="בטל">↺</div>
+        <div class="sb-ic" title="חזור">↻</div>
+        <div class="sb-ic" title="עוד">⋯</div>
+      </div>
+
+      <div class="canvas-area">
+        <div class="a4-page">
+          <h1>מסמך לדוגמה</h1>
+          <p>זהו עמוד A4 לבן ונקי, שומר על WYSIWYG מלא עם שוליים 2.5 ס"מ, מרחף מעל הרקע הכהה עם גלי-האנרגיה.</p>
+          <p>הריבון העליון וסרגל-הצד בנויים בסגנון זכוכית פרימיום — שקיפות, טשטוש-רקע (blur), והארת-קצה עדינה.</p>
+        </div>
+      </div>
+
+      <div class="floatbar">
+        <div class="fb-row">
+          <div class="fb-ic"><img src="assets/icon-bold.png" alt=""></div>
+          <div class="fb-ic"><img src="assets/icon-italic.png" alt=""></div>
+          <div class="fb-ic">U</div>
+          <div class="fb-main"><img src="assets/icon-textcolor.png" alt="" style="width:60%;height:60%;object-fit:contain;"></div>
+          <div class="fb-ic"><img src="assets/icon-share.png" alt=""></div>
+          <div class="fb-ic">☰</div>
+        </div>
+        <div class="fb-row">
+          <div class="fb-ic"><img src="assets/icon-alignright.png" alt=""></div>
+          <div class="fb-ic"><img src="assets/icon-aligncenter.png" alt=""></div>
+          <div class="fb-ic"><img src="assets/icon-alignleft.png" alt=""></div>
+          <div class="fb-ic">▾</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

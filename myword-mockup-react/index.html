@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MyWord — ממשק ניאון (React)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              night: { 900: '#0A1220', 800: '#101B2E', 700: '#16233A' },
+              ice: { 300: '#CFE4F8', 400: '#9FC6E8', 500: '#5A96D2' },
+              page: '#F4F1EC',
+              inksoft: '#7E9BB4',
+              inkmain: '#EAF3FA',
+            },
+            boxShadow: {
+              glow: '0 0 14px rgba(150,200,240,0.35)',
+              glowStrong: '0 0 22px rgba(150,200,240,0.55)',
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      body { background: radial-gradient(1200px 800px at 70% 20%, #101B2E 0%, #0A1220 60%); }
+      .glass { background: rgba(255,255,255,0.06); border: 1px solid rgba(150,195,230,0.30); backdrop-filter: blur(14px); }
+      .glass-tile { background: linear-gradient(160deg, rgba(255,255,255,0.14) 0%, rgba(255,255,255,0.04) 100%); border: 1px solid rgba(150,195,230,0.35); }
+      .glass-tile:hover { background: rgba(159,198,232,0.18); border-color: rgba(159,198,232,0.6); box-shadow: 0 0 14px rgba(150,200,240,0.35); }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>

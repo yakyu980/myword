@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<title>MyWord — Logo v1 (SVG)</title>
+<style>
+  body{
+    margin:0; min-height:100vh;
+    display:flex; flex-wrap:wrap; gap:40px;
+    align-items:center; justify-content:center;
+    background:#10141c;
+    font-family:"Segoe UI", Arial, sans-serif;
+    padding:40px;
+  }
+  .card{
+    display:flex; flex-direction:column; align-items:center; gap:12px;
+  }
+  .card span{ color:#9fb6c9; font-size:13px; }
+  .dark-bg{
+    border-radius:24px;
+    background: radial-gradient(circle at 35% 25%, #0A4174 0%, #001D39 75%);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+  }
+  .light-bg{
+    border-radius:24px;
+    background: linear-gradient(160deg, #f4f8fc, #dfeaf4);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.35);
+  }
+</style>
+</head>
+<body>
+
+<div class="card">
+  <svg class="dark-bg" width="420" height="420" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <linearGradient id="wGrad" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#BDD8E9"/>
+        <stop offset="0.5" stop-color="#7BBDE8"/>
+        <stop offset="1" stop-color="#4E8EA2"/>
+      </linearGradient>
+      <linearGradient id="hexGrad" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0" stop-color="#BDD8E9"/>
+        <stop offset="1" stop-color="#49769F"/>
+      </linearGradient>
+      <linearGradient id="featherGrad" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0" stop-color="#E8ECF0"/>
+        <stop offset="0.55" stop-color="#B9C2CC"/>
+        <stop offset="1" stop-color="#8A98A6"/>
+      </linearGradient>
+      <linearGradient id="circGrad" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#BDD8E9" stop-opacity="0.9"/>
+        <stop offset="1" stop-color="#6EA2B3" stop-opacity="0.35"/>
+      </linearGradient>
+    </defs>
+
+    <polygon points="256,48 428,148 428,348 256,448 84,348 84,148"
+             fill="none" stroke="url(#hexGrad)" stroke-width="7" stroke-linejoin="round" opacity="0.95"/>
+
+    <polygon points="256,96 388,172 388,324 256,400 124,324 124,172"
+             fill="none" stroke="url(#hexGrad)" stroke-width="3.5" stroke-linejoin="round" opacity="0.55"/>
+
+    <circle cx="256" cy="248" r="150" fill="none" stroke="url(#circGrad)" stroke-width="5"/>
+    <circle cx="256" cy="248" r="150" fill="#7BBDE8" opacity="0.06"/>
+
+    <text x="256" y="305" text-anchor="middle"
+          font-family="Georgia, 'Times New Roman', serif" font-weight="bold"
+          font-size="200" fill="url(#wGrad)"
+          stroke="#BDD8E9" stroke-width="2">W</text>
+
+    <g transform="translate(300,88) rotate(24)">
+      <path d="M96,-8
+               C70,-14 34,0 12,34
+               C2,50 -4,70 -6,92
+               L0,96
+               C4,74 12,56 24,42
+               C20,58 18,72 20,86
+               L26,88
+               C28,70 34,52 44,38
+               C42,52 44,64 48,74
+               L54,74
+               C54,58 58,44 66,32
+               C78,18 90,4 96,-8 Z"
+            fill="url(#featherGrad)" stroke="#8A98A6" stroke-width="2" stroke-linejoin="round"/>
+      <path d="M-6,92 L-22,132" stroke="#8A98A6" stroke-width="4" stroke-linecap="round"/>
+    </g>
+
+    <text x="256" y="472" text-anchor="middle"
+          font-family="Georgia, serif" font-style="italic" font-weight="bold"
+          font-size="52" fill="#BDD8E9">myWord</text>
+  </svg>
+  <span>גרסה כהה — רקע נאבי עמוק</span>
+</div>
+
+<div class="card">
+  <svg class="light-bg" width="420" height="420" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <linearGradient id="wGradL" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#7BBDE8"/>
+        <stop offset="1" stop-color="#0A4174"/>
+      </linearGradient>
+      <linearGradient id="hexGradL" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0" stop-color="#49769F"/>
+        <stop offset="1" stop-color="#0A4174"/>
+      </linearGradient>
+      <linearGradient id="featherGradL" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0" stop-color="#C9D2DB"/>
+        <stop offset="1" stop-color="#7E8C9A"/>
+      </linearGradient>
+    </defs>
+
+    <polygon points="256,48 428,148 428,348 256,448 84,348 84,148"
+             fill="none" stroke="url(#hexGradL)" stroke-width="7" stroke-linejoin="round" opacity="0.9"/>
+
+    <polygon points="256,96 388,172 388,324 256,400 124,324 124,172"
+             fill="none" stroke="url(#hexGradL)" stroke-width="3.5" stroke-linejoin="round" opacity="0.5"/>
+
+    <circle cx="256" cy="248" r="150" fill="none" stroke="#6EA2B3" stroke-width="5" opacity="0.7"/>
+    <circle cx="256" cy="248" r="150" fill="#7BBDE8" opacity="0.08"/>
+
+    <text x="256" y="305" text-anchor="middle"
+          font-family="Georgia, 'Times New Roman', serif" font-weight="bold"
+          font-size="200" fill="url(#wGradL)">W</text>
+
+    <g transform="translate(300,88) rotate(24)">
+      <path d="M96,-8
+               C70,-14 34,0 12,34
+               C2,50 -4,70 -6,92
+               L0,96
+               C4,74 12,56 24,42
+               C20,58 18,72 20,86
+               L26,88
+               C28,70 34,52 44,38
+               C42,52 44,64 48,74
+               L54,74
+               C54,58 58,44 66,32
+               C78,18 90,4 96,-8 Z"
+            fill="url(#featherGradL)" stroke="#7E8C9A" stroke-width="2" stroke-linejoin="round"/>
+      <path d="M-6,92 L-22,132" stroke="#7E8C9A" stroke-width="4" stroke-linecap="round"/>
+    </g>
+
+    <text x="256" y="472" text-anchor="middle"
+          font-family="Georgia, serif" font-style="italic" font-weight="bold"
+          font-size="52" fill="#0A4174">myWord</text>
+  </svg>
+  <span>גרסה בהירה — רקע תכלת עדין</span>
+</div>
+
+</body>
+</html>

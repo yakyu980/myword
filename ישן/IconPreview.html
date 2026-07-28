@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<title>תצוגת אייקונים - MyWord 3.0</title>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
+<style>
+  body {
+    font-family: 'Segoe UI', Tahoma, Arial, sans-serif;
+    background: #f5f5f5;
+    margin: 0;
+    padding: 24px;
+    color: #222;
+  }
+  h1 {
+    color: #2b579a;
+    text-align: center;
+    margin: 0 0 8px;
+  }
+  .subtitle {
+    text-align: center;
+    color: #666;
+    margin-bottom: 30px;
+  }
+  .status-bar {
+    background: #fff;
+    padding: 14px 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .status-bar .indicator {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-weight: 600;
+  }
+  .status-ok { background: #e8f5e9; color: #2e7d32; }
+  .status-bad { background: #ffebee; color: #c62828; }
+  section {
+    background: #fff;
+    margin: 20px auto;
+    max-width: 1200px;
+    padding: 24px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  }
+  section h2 {
+    color: #2b579a;
+    border-bottom: 2px solid #e7f1ff;
+    padding-bottom: 10px;
+    margin: 0 0 16px;
+    font-size: 18px;
+  }
+  .icon-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 12px;
+  }
+  .icon-card {
+    border: 1px solid #e0e0e0;
+    border-radius: 6px;
+    padding: 14px 8px;
+    text-align: center;
+    transition: all 0.15s;
+    background: #fafafa;
+  }
+  .icon-card:hover {
+    border-color: #2b579a;
+    background: #e7f1ff;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(43,87,154,0.15);
+  }
+  .icon-card .material-icons,
+  .icon-card .material-icons-outlined {
+    font-size: 32px;
+    color: #2b579a;
+    margin-bottom: 8px;
+  }
+  .icon-card .label {
+    font-size: 12px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 4px;
+  }
+  .icon-card .he {
+    font-size: 13px;
+    color: #2b579a;
+    font-weight: 500;
+  }
+  .word-style {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border: 1px solid #d0d0d0;
+    border-radius: 4px;
+    background: #fff;
+    font-size: 16px;
+    margin: 0 auto 8px;
+  }
+  .summary-box {
+    background: linear-gradient(135deg, #e7f1ff, #f0f8ff);
+    border-right: 4px solid #2b579a;
+    padding: 16px 20px;
+    border-radius: 6px;
+    margin-top: 20px;
+  }
+  .summary-box h3 { margin: 0 0 8px; color: #2b579a; }
+  .legend {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    font-size: 13px;
+    color: #555;
+  }
+</style>
+</head>
+<body>
+
+<h1>🎨 תצוגת אייקונים - MyWord 3.0</h1>
+<p class="subtitle">בדוק שכל אייקון נטען ושאתה מזהה אותו - ואז נבנה את התוכנה המלאה</p>
+
+<div class="status-bar">
+  <div>
+    <strong>סטטוס טעינה:</strong>
+    <span class="indicator status-ok" id="status">
+      <span class="material-icons" style="font-size:18px;">check_circle</span>
+      Material Icons נטענו בהצלחה
+    </span>
+  </div>
+  <div class="legend">
+    <span>🔵 אייקון Material (Google)</span>
+    <span>🅱️ סמל סגנון Word</span>
+  </div>
+</div>
+
+<!-- File System Icons -->
+<section>
+  <h2><span class="material-icons" style="vertical-align:middle;">folder</span> מערכת קבצים ומסמכים</h2>
+  <div class="icon-grid">
+    <div class="icon-card"><span class="material-icons">folder</span><div class="he">תיקיה</div><div class="label">folder</div></div>
+    <div class="icon-card"><span class="material-icons">folder_open</span><div class="he">תיקיה פתוחה</div><div class="label">folder_open</div></div>
+    <div class="icon-card"><span class="material-icons">create_new_folder</span><div class="he">תיקיה חדשה</div><div class="label">create_new_folder</div></div>
+    <div class="icon-card"><span class="material-icons">description</span><div class="he">מסמך</div><div class="label">description</div></div>
+    <div class="icon-card"><span class="material-icons">note_add</span><div class="he">מסמך חדש</div><div class="label">note_add</div></div>
+    <div class="icon-card"><span class="material-icons">drive_file_rename_outline</span><div class="he">שנה שם</div><div class="label">rename</div></div>
+    <div class="icon-card"><span class="material-icons">file_copy</span><div class="he">שכפל</div><div class="label">duplicate</div></div>
+    <div class="icon-card"><span class="material-icons">drive_file_move</span><div class="he">העבר לתיקיה</div><div class="label">move</div></div>
+    <div class="icon-card"><span class="material-icons">delete</span><div class="he">מחק</div><div class="label">delete</div></div>
+    <div class="icon-card"><span class="material-icons">delete_forever</span><div class="he">מחק לצמיתות</div><div class="label">delete_forever</div></div>
+    <div class="icon-card"><span class="material-icons">restore_from_trash</span><div class="he">שחזר מסל</div><div class="label">restore</div></div>
+    <div class="icon-card"><span class="material-icons">delete_outline</span><div class="he">סל מיחזור</div><div class="label">trash</div></div>
+  </div>
+</section>
+
+<!-- Save & Lock -->
+<section>
+  <h2><span class="material-icons" style="vertical-align:middle;">save</span> שמירה ובטיחות</h2>
+  <div class="icon-grid">
+    <div class="icon-card"><span class="material-icons">save</span><div class="he">שמור</div><div class="label">save</div></div>
+    <div class="icon-card"><span class="material-icons">save_as</span><div class="he">שמור בשם</div><div class="label">save_as</div></div>
+    <div class="icon-card"><span class="material-icons">cloud_done</span><div class="he">נשמר ✓</div><div class="label">cloud_done</div></div>
+    <div class="icon-card"><span class="material-icons">cloud_upload</span><div class="he">שומר...</div><div class="label">cloud_upload</div></div>
+    <div class="icon-card"><span class="material-icons">cloud_off</span><div class="he">לא נשמר</div><div class="label">cloud_off</div></div>
+    <div class="icon-card"><span class="material-icons">lock</span><div class="he">מסמך נעול</div><div class="label">lock</div></div>
+    <div class="icon-card"><span class="material-icons">lock_open</span><div class="he">פתח נעילה</div><div class="label">lock_open</div></div>
+    <div class="icon-card"><span class="material-icons">history</span><div class="he">היסטוריה</div><div class="label">history</div></div>
+    <div class="icon-card"><span class="material-icons">backup</span><div class="he">גיבוי</div><div class="label">backup</div></div>
+  </div>
+</section>
+
+<!-- Edit Operations -->
+<section>
+  <h2><span class="material-icons" style="vertical-align:middle;">edit</span> עריכה ופעולות</h2>
+  <div class="icon-grid">
+    <div class="icon-card"><span class="material-icons">undo</span><div class="he">בטל</div><div class="label">undo</div></div>
+    <div class="icon-card"><span class="material-icons">redo</span><div class="he">חזור</div><div class="label">redo</div></div>
+    <div class="icon-card"><span class="material-icons">content_cut</span><div class="he">גזור</div><div class="label">cut</div></div>
+    <div class="icon-card"><span class="material-icons">content_copy</span><div class="he">העתק</div><div class="label">copy</div></div>
+    <div class="icon-card"><span class="material-icons">content_paste</span><div class="he">הדבק</div><div class="label">paste</div></div>
+    <div class="icon-card"><span class="material-icons">search</span><div class="he">חיפוש</div><div class="label">search</div></div>
+    <div class="icon-card"><span class="material-icons">find_replace</span><div class="he">החלף</div><div class="label">find_replace</div></div>
+    <div class="icon-card"><span class="material-icons">select_all</span><div class="he">בחר הכל</div><div class="label">select_all</div></div>
+  </div>
+</section>
+
+<!-- Text Formatting (Word-style) -->
+<section>
+  <h2>🅱️ עיצוב טקסט (סגנון Word)</h2>
+  <div class="icon-grid">
+    <div class="icon-card"><div class="word-style"><b>B</b></div><div class="he">מודגש</div><div class="label">Bold</div></div>
+    <div class="icon-card"><div class="word-style"><i>I</i></div><div class="he">נטוי</div><div class="label">Italic</div></div>
+    <div class="icon-card"><div class="word-style"><u>U</u></div><div class="he">קו תחתון</div><div class="label">Underline</div></div>
+    <div class="icon-card"><div class="word-style"><s>S</s></div><div class="he">קו חוצה</div><div class="label">Strikethrough</div></div>
+    <div class="icon-card"><div class="word-style">x²</div><div class="he">כתב עילי</div><div class="label">Superscript</div></div>
+    <div class="icon-card"><div class="word-style">x₂</div><div class="he">כתב תחתי</div><div class="label">Subscript</div></div>
+    <div class="icon-card"><span class="material-icons">format_color_text</span><div class="he">צבע טקסט</div><div class="label">color_text</div></div>
+    <div class="icon-card"><span class="material-icons">format_color_fill</span><div class="he">צבע הדגשה</div><div class="label">highlight</div></div>
+    <div class="icon-card"><span class="material-icons">format_clear</span><div class="he">נקה עיצוב</div><div class="label">clear_format</div></div>
+    <div class="icon-card"><span class="material-icons">text_fields</span><div class="he">גודל טקסט</div><div class="label">font_size</div></div>
+  </div>
+</section>
+
+<!-- Paragraph Formatting -->
+<section>
+  <h2><span class="material-icons" style="vertical-align:middle;">format_align_right</span> פיסקה ויישור</h2>
+  <div class="icon-grid">
+    <div class="icon-card"><span class="material-icons">format_align_right</span><div class="he">ימין</div><div class="label">align_right</div></div>
+    <div class="icon-card"><span class="material-icons">format_align_center</span><div class="he">מרכז</div><div class="label">align_center</div></div>
+    <div class="icon-card"><span class="material-icons">format_align_left</span><div class="he">שמאל</div><div class="label">align_left</div></div>
+    <div class="icon-card"><span class="material-icons">format_align_justify</span><div class="he">דו-צדדי</div><div class="label">justify</div></div>
+    <div class="icon-card"><span class="material-icons">format_list_bulleted</span><div class="he">רשימת תבליטים</div><div class="label">bulleted</div></div>
+    <div class="icon-card"><span class="material-icons">format_list_numbered</span><div class="he">רשימה ממוספרת</div><div class="label">numbered</div></div>
+    <div class="icon-card"><span class="material-icons">checklist</span><div class="he">רשימת מטלות</div><div class="label">checklist</div></div>
+    <div class="icon-card"><span class="material-icons">format_indent_increase</span><div class="he">הזחה</div><div class="label">indent</div></div>
+    <div class="icon-card"><span class="material-icons">format_indent_decrease</span><div class="he">בטל הזחה</div><div class="label">outdent</div></div>
+    <div class="icon-card"><span class="material-icons">format_line_spacing</span><div class="he">מרווח שורות</div><div class="label">line_spacing</div></div>
+    <div class="icon-card"><span class="material-icons">format_quote</span><div class="he">ציטוט</div><div class="label">quote</div></div>
+    <div class="icon-card"><span class="material-icons">title</span><div class="he">כותרת</div><div class="label">heading</div></div>
+  </div>
+</section>
+
+<!-- Insert Items -->
+<section>
+  <h2><span class="material-icons" style="vertical-align:middle;">add_box</span> הוספת אובייקטים</h2>
+  <div class="icon-grid">
+    <div class="icon-card"><span class="material-icons">image</span><div class="he">תמונה</div><div class="label">image</div></div>
+    <div class="icon-card"><span class="material-icons">add_photo_alternate</span><div class="he">הוסף תמונה</div><div class="label">add_image</div></div>
+    <div class="icon-card"><span class="material-icons">table_chart</span><div class="he">טבלה</div><div class="label">table</div></div>
+    <div class="icon-card"><span class="material-icons">link</span><div class="he">קישור</div><div class="label">link</div></div>
+    <div class="icon-card"><span class="material-icons">link_off</span><div class="he">הסר קישור</div><div class="label">unlink</div></div>
+    <div class="icon-card"><span class="material-icons">bookmark</span><div class="he">סימנייה</div><div class="label">bookmark</div></div>
+    <div class="icon-card"><span class="material-icons">horizontal_rule</span><div class="he">קו מפריד</div><div class="label">divider</div></div>
+    <div class="icon-card"><span class="material-icons">code</span><div class="he">בלוק קוד</div><div class="label">code</div></div>
+    <div class="icon-card"><span class="material-icons">attach_file</span><div class="he">קובץ מצורף</div><div class="label">attach</div></div>
+    <div class="icon-card"><span class="material-icons">emoji_emotions</span><div class="he">סמלי רגש</div><div class="label">emoji</div></div>
+    <div class="icon-card"><span class="material-icons">event</span><div class="he">תאריך</div><div class="label">date</div></div>
+    <div class="icon-card"><span class="material-icons">access_time</span><div class="he">שעה</div><div class="label">time</div></div>
+    <div class="icon-card"><span class="material-icons">superscript</span><div class="he">הערת שוליים</div><div class="label">footnote</div></div>
+    <div class="icon-card"><span class="material-icons">picture_as_pdf</span><div class="he">PDF</div><div class="label">pdf</div></div>
+  </div>
+</section>
+
+<!-- Voice & Media -->
+<section>
+  <h2><span class="material-icons" style="vertical-align:middle;">mic</span> קול ומדיה</h2>
+  <div class="icon-grid">
+    <div class="icon-card"><span class="material-icons">mic</span><div class="he">הקלטה</div><div class="label">mic</div></div>
+    <div class="icon-card"><span class="material-icons">mic_off</span><div class="he">הפסק הקלטה</div><div class="label">mic_off</div></div>
+    <div class="icon-card"><span class="material-icons">volume_up</span><div class="he">הקרא בקול</div><div class="label">read_aloud</div></div>
+    <div class="icon-card"><span class="material-icons">volume_off</span><div class="he">השתק</div><div class="label">mute</div></div>
+    <div class="icon-card"><span class="material-icons">play_arrow</span><div class="he">הפעל</div><div class="label">play</div></div>
+    <div class="icon-card"><span class="material-icons">pause</span><div class="he">השהה</div><div class="label">pause</div></div>
+    <div class="icon-card"><span class="material-icons">videocam</span><div class="he">וידאו</div><div class="label">video</div></div>
+  </div>
+</section>
+
+<!-- View Modes -->
+<section>
+  <h2><span class="material-icons" style="vertical-align:middle;">visibility</span> תצוגה ומצבים</h2>
+  <div class="icon-grid">
+    <div class="icon-card"><span class="material-icons">visibility</span><div class="he">הצג</div><div class="label">show</div></div>
+    <div class="icon-card"><span class="material-icons">visibility_off</span><div class="he">הסתר</div><div class="label">hide</div></div>
+    <div class="icon-card"><span class="material-icons">center_focus_strong</span><div class="he">מצב מיקוד</div><div class="label">focus</div></div>
+    <div class="icon-card"><span class="material-icons">slideshow</span><div class="he">מצב מצגת</div><div class="label">slideshow</div></div>
+    <div class="icon-card"><span class="material-icons">keyboard</span><div class="he">מכונת כתיבה</div><div class="label">typewriter</div></div>
+    <div class="icon-card"><span class="material-icons">dark_mode</span><div class="he">מצב כהה</div><div class="label">dark</div></div>
+    <div class="icon-card"><span class="material-icons">light_mode</span><div class="he">מצב בהיר</div><div class="label">light</div></div>
+    <div class="icon-card"><span class="material-icons">palette</span><div class="he">צבעים אישיים</div><div class="label">palette</div></div>
+    <div class="icon-card"><span class="material-icons">zoom_in</span><div class="he">הגדל</div><div class="label">zoom_in</div></div>
+    <div class="icon-card"><span class="material-icons">zoom_out</span><div class="he">הקטן</div><div class="label">zoom_out</div></div>
+    <div class="icon-card"><span class="material-icons">fit_screen</span><div class="he">התאם למסך</div><div class="label">fit</div></div>
+    <div class="icon-card"><span class="material-icons">fullscreen</span><div class="he">מסך מלא</div><div class="label">fullscreen</div></div>
+  </div>
+</section>
+
+<!-- Tools & Settings -->
+<section>
+  <h2><span class="material-icons" style="vertical-align:middle;">build</span> כלים והגדרות</h2>
+  <div class="icon-grid">
+    <div class="icon-card"><span class="material-icons">spellcheck</span><div class="he">בדיקת איות</div><div class="label">spellcheck</div></div>
+    <div class="icon-card"><span class="material-icons">translate</span><div class="he">תרגום</div><div class="label">translate</div></div>
+    <div class="icon-card"><span class="material-icons">analytics</span><div class="he">סטטיסטיקה</div><div class="label">stats</div></div>
+    <div class="icon-card"><span class="material-icons">flag</span><div class="he">יעדי כתיבה</div><div class="label">goals</div></div>
+    <div class="icon-card"><span class="material-icons">timer</span><div class="he">זמן קריאה</div><div class="label">read_time</div></div>
+    <div class="icon-card"><span class="material-icons">bolt</span><div class="he">Snippets</div><div class="label">snippets</div></div>
+    <div class="icon-card"><span class="material-icons">style</span><div class="he">תבניות</div><div class="label">templates</div></div>
+    <div class="icon-card"><span class="material-icons">brush</span><div class="he">ציור</div><div class="label">draw</div></div>
+    <div class="icon-card"><span class="material-icons">crop</span><div class="he">חיתוך</div><div class="label">crop</div></div>
+    <div class="icon-card"><span class="material-icons">filter</span><div class="he">פילטרים</div><div class="label">filters</div></div>
+    <div class="icon-card"><span class="material-icons">print</span><div class="he">הדפס</div><div class="label">print</div></div>
+    <div class="icon-card"><span class="material-icons">share</span><div class="he">שתף</div><div class="label">share</div></div>
+    <div class="icon-card"><span class="material-icons">download</span><div class="he">הורד</div><div class="label">download</div></div>
+    <div class="icon-card"><span class="material-icons">upload</span><div class="he">העלה</div><div class="label">upload</div></div>
+    <div class="icon-card"><span class="material-icons">settings</span><div class="he">הגדרות</div><div class="label">settings</div></div>
+    <div class="icon-card"><span class="material-icons">help</span><div class="he">עזרה</div><div class="label">help</div></div>
+    <div class="icon-card"><span class="material-icons">info</span><div class="he">מידע</div><div class="label">info</div></div>
+    <div class="icon-card"><span class="material-icons">close</span><div class="he">סגור</div><div class="label">close</div></div>
+    <div class="icon-card"><span class="material-icons">menu</span><div class="he">תפריט</div><div class="label">menu</div></div>
+    <div class="icon-card"><span class="material-icons">more_vert</span><div class="he">עוד אפשרויות</div><div class="label">more</div></div>
+  </div>
+</section>
+
+<!-- Direction & Language -->
+<section>
+  <h2><span class="material-icons" style="vertical-align:middle;">language</span> כיוון ושפה</h2>
+  <div class="icon-grid">
+    <div class="icon-card"><span class="material-icons">format_textdirection_r_to_l</span><div class="he">עברית RTL</div><div class="label">rtl</div></div>
+    <div class="icon-card"><span class="material-icons">format_textdirection_l_to_r</span><div class="he">אנגלית LTR</div><div class="label">ltr</div></div>
+    <div class="icon-card"><span class="material-icons">language</span><div class="he">שפה</div><div class="label">language</div></div>
+    <div class="icon-card"><span class="material-icons">auto_awesome</span><div class="he">חכם אוטומטי</div><div class="label">smart_auto</div></div>
+  </div>
+</section>
+
+<!-- Status Indicators -->
+<section>
+  <h2><span class="material-icons" style="vertical-align:middle;">notifications</span> מצב ואינדיקטורים</h2>
+  <div class="icon-grid">
+    <div class="icon-card"><span class="material-icons" style="color:#4caf50;">check_circle</span><div class="he">הצלחה</div><div class="label">success</div></div>
+    <div class="icon-card"><span class="material-icons" style="color:#f44336;">error</span><div class="he">שגיאה</div><div class="label">error</div></div>
+    <div class="icon-card"><span class="material-icons" style="color:#ff9800;">warning</span><div class="he">אזהרה</div><div class="label">warning</div></div>
+    <div class="icon-card"><span class="material-icons" style="color:#2196f3;">info</span><div class="he">מידע</div><div class="label">info</div></div>
+    <div class="icon-card"><span class="material-icons">edit_note</span><div class="he">מקליד...</div><div class="label">typing</div></div>
+    <div class="icon-card"><span class="material-icons">sync</span><div class="he">מסנכרן</div><div class="label">syncing</div></div>
+  </div>
+</section>
+
+<div class="summary-box">
+  <h3>📊 סיכום</h3>
+  <p><strong>סך הכל:</strong> 100+ אייקונים מקצועיים מסוג Material Icons (Google) + סגנון Word לעיצוב טקסט.</p>
+  <p><strong>טעינה:</strong> מ-CDN של Google (יעבוד בכל מחשב עם אינטרנט). אם אתה רוצה שיעבוד גם ללא אינטרנט - אגיד לי.</p>
+  <p><strong>השלב הבא:</strong> אם כל האייקונים נראים לך טוב - תכתוב לי "תתחיל" ואבנה את המערכת המלאה. אם יש אייקון שלא מוצא חן - אמור איזה ואחליף.</p>
+</div>
+
+<script>
+// Verify Material Icons loaded
+window.addEventListener('load', () => {
+  setTimeout(() => {
+    const test = document.createElement('span');
+    test.className = 'material-icons';
+    test.textContent = 'folder';
+    test.style.position = 'absolute';
+    test.style.opacity = '0';
+    document.body.appendChild(test);
+    const w = test.offsetWidth;
+    test.remove();
+    const status = document.getElementById('status');
+    if (w > 30) {
+      status.className = 'indicator status-ok';
+      status.innerHTML = '<span class="material-icons" style="font-size:18px;">check_circle</span> כל האייקונים נטענו בהצלחה';
+    } else {
+      status.className = 'indicator status-bad';
+      status.innerHTML = '⚠️ Material Icons לא נטענו - בדוק חיבור אינטרנט';
+    }
+  }, 1000);
+});
+</script>
+
+</body>
+</html>

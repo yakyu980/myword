@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8" />
+<title>myWord — Image Map Prototype (התמונה שלך, ללא שינוי עיצובי)</title>
+<style>
+  html, body { margin: 0; background: #05070c; font-family: 'Segoe UI', Arial, sans-serif; }
+  /* המכולה שומרת בדיוק על יחס-הממדים המקורי של התמונה: 1320x854 */
+  #stage {
+    position: relative;
+    width: 100%;
+    max-width: 1320px;
+    aspect-ratio: 1320 / 854;
+    margin: 0 auto;
+    background-image: url('תמונה.jpeg');
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+  }
+  /* כפתורי-לחיצה שקופים לגמרי — התמונה עצמה לא משתנה ולא נוגעים בעיצובה */
+  .hit {
+    position: absolute;
+    background: transparent;
+    border: none;
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
+  }
+  /* מצב-דיבוג בלבד: מסגרת ירוקה כדי לוודא שהאזורים ממוקמים נכון מעל התמונה */
+  body.debug .hit { background: rgba(80, 220, 120, 0.25); outline: 1px solid #4CE07A; }
+
+  #toast {
+    position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%);
+    background: rgba(10, 18, 32, 0.92); color: #CFE4F8; border: 1px solid rgba(150,195,230,0.4);
+    padding: 10px 20px; border-radius: 999px; font-size: 14px;
+    opacity: 0; transition: opacity .25s; pointer-events: none; z-index: 50;
+  }
+  #toast.show { opacity: 1; }
+
+  #debugToggle {
+    position: fixed; top: 10px; right: 10px; z-index: 60;
+    background: #101B2E; color: #CFE4F8; border: 1px solid rgba(150,195,230,0.4);
+    border-radius: 8px; padding: 6px 10px; font-size: 12px; cursor: pointer;
+  }
+</style>
+</head>
+<body>
+
+<button id="debugToggle" onclick="document.body.classList.toggle('debug')">הצג/הסתר אזורי-לחיצה</button>
+
+<div id="stage">
+  <!-- שורת טאבים -->
+  <button class="hit" style="left:92.05%; top:4.68%; width:6.44%; height:3.28%;" data-label="טאב: קובץ"></button>
+  <button class="hit" style="left:83.33%; top:4.10%; width:7.95%; height:4.33%;" data-label="טאב: בית (פעיל)"></button>
+  <button class="hit" style="left:74.24%; top:4.68%; width:8.71%; height:3.28%;" data-label="טאב: הוספה"></button>
+
+  <!-- חץ קיפול ריבון -->
+  <button class="hit" style="left:16.82%; top:10.54%; width:1.97%; height:4.68%;" data-label="קיפול/פתיחת סרגל הריבון"></button>
+
+  <!-- 15 אריחי ריבון (13 כלים + חתימת Alice + כפתור ⋮) -->
+  <button class="hit" style="left:19.55%; top:9.60%; width:4.62%; height:5.85%;" data-label="ריבון: חדש"></button>
+  <button class="hit" style="left:24.85%; top:9.60%; width:4.62%; height:5.85%;" data-label="ריבון: פתח (RTF)"></button>
+  <button class="hit" style="left:30.15%; top:9.60%; width:4.62%; height:5.85%;" data-label="ריבון: שמור"></button>
+  <button class="hit" style="left:35.45%; top:9.60%; width:4.62%; height:5.85%;" data-label="ריבון: קבצים"></button>
+  <button class="hit" style="left:40.76%; top:9.60%; width:4.62%; height:5.85%;" data-label="ריבון: בטל"></button>
+  <button class="hit" style="left:46.06%; top:9.60%; width:4.62%; height:5.85%;" data-label="ריבון: חזור"></button>
+  <button class="hit" style="left:51.36%; top:9.60%; width:4.62%; height:5.85%;" data-label="ריבון: סגנון טקסט (T)"></button>
+  <button class="hit" style="left:56.67%; top:9.60%; width:4.62%; height:5.85%;" data-label="ריבון: כותרת (H)"></button>
+  <button class="hit" style="left:61.97%; top:9.60%; width:4.62%; height:5.85%;" data-label="ריבון: רשימות"></button>
+  <button class="hit" style="left:67.27%; top:9.60%; width:4.62%; height:5.85%;" data-label="ריבון: תמונות"></button>
+  <button class="hit" style="left:72.58%; top:9.60%; width:4.62%; height:5.85%;" data-label="ריבון: עיצוב"></button>
+  <button class="hit" style="left:77.88%; top:9.60%; width:4.62%; height:5.85%;" data-label="ריבון: צורה"></button>
+  <button class="hit" style="left:83.18%; top:9.60%; width:4.62%; height:5.85%;" data-label="ריבון: טקסט תלת-מימד"></button>
+  <button class="hit" style="left:88.48%; top:9.60%; width:4.62%; height:5.85%;" data-label="חתימת Alice (בריבון)"></button>
+  <button class="hit" style="left:93.79%; top:9.60%; width:4.62%; height:5.85%;" data-label="עוד אפשרויות (⋮)"></button>
+
+  <!-- סרגל-צד -->
+  <button class="hit" style="left:2.12%; top:8.43%; width:3.18%; height:4.92%;" data-label="לוגו-עט (סרגל-צד)"></button>
+  <button class="hit" style="left:1.89%; top:20.84%; width:12.88%; height:4.45%;" data-label="סרגל-צד: חדש"></button>
+  <button class="hit" style="left:1.89%; top:25.76%; width:12.88%; height:4.45%;" data-label="סרגל-צד: פתח"></button>
+  <button class="hit" style="left:1.89%; top:30.68%; width:12.88%; height:4.45%;" data-label="סרגל-צד: שמור"></button>
+  <button class="hit" style="left:1.89%; top:35.60%; width:12.88%; height:4.45%;" data-label="סרגל-צד: יצוא (A4 PDF)"></button>
+  <button class="hit" style="left:1.89%; top:42.39%; width:12.88%; height:4.68%;" data-label="סרגל-צד: כלי כתיבה"></button>
+  <button class="hit" style="left:1.89%; top:48.24%; width:12.88%; height:3.04%;" data-label="מתאר מסמך (כותרת סעיף)"></button>
+  <button class="hit" style="left:1.89%; top:52.23%; width:12.88%; height:3.51%;" data-label="מתאר: מבוא"></button>
+  <button class="hit" style="left:1.89%; top:55.97%; width:12.88%; height:3.51%;" data-label="מתאר: פרק 1 (הרחבה)"></button>
+  <button class="hit" style="left:1.89%; top:59.72%; width:12.88%; height:3.51%;" data-label="מתאר: סיכום"></button>
+
+  <!-- דף המסמך -->
+  <button class="hit" style="left:28.79%; top:20.84%; width:45.83%; height:3.51%;" data-label="קפסולת header"></button>
+  <button class="hit" style="left:72.12%; top:21.31%; width:1.97%; height:2.81%;" data-label="header: חץ למעלה/למטה"></button>
+  <button class="hit" style="left:28.79%; top:25.99%; width:45.83%; height:3.98%;" data-label="קפסולת footer (עליונה)"></button>
+  <button class="hit" style="left:72.12%; top:26.46%; width:1.97%; height:3.04%;" data-label="footer: חץ למעלה/למטה"></button>
+  <button class="hit" style="left:41.29%; top:40.98%; width:21.21%; height:39.93%;" data-label="לוגו myWord (הקסגון+W+נוצה)"></button>
+  <button class="hit" style="left:66.52%; top:77.28%; width:6.06%; height:3.04%;" data-label="צ'יפ footer ✕ (סגירה)"></button>
+
+  <!-- חתימת Alice — פינה תחתונה -->
+  <button class="hit" style="left:87.50%; top:86.07%; width:10.61%; height:7.61%;" data-label="חתימת Alice (מים, פינה)"></button>
+</div>
+
+<div id="toast"></div>
+
+<script>
+  const toast = document.getElementById('toast');
+  let hideTimer = null;
+  document.querySelectorAll('.hit').forEach(btn => {
+    btn.addEventListener('click', () => {
+      toast.textContent = '⚡ ' + btn.dataset.label;
+      toast.classList.add('show');
+      clearTimeout(hideTimer);
+      hideTimer = setTimeout(() => toast.classList.remove('show'), 1800);
+    });
+  });
+</script>
+
+</body>
+</html>

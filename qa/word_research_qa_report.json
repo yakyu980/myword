@@ -1,0 +1,223 @@
+{
+  "generated": "2026-06-14",
+  "source_file": "MyWord-v2.html",
+  "total_bugs": 18,
+
+  "bugs": [
+    {
+      "id": "BUG-01",
+      "title": "FREE_MARGIN_CM = 1.0 במקום 0.5",
+      "severity": "high",
+      "location": "שורה 6134 — const FREE_MARGIN_CM",
+      "description": "CLAUDE.md §5 מצהיר 0.5cm, הקוד ממש 1.0cm. אובייקטים נבלמים 1cm מהקצה.",
+      "word_behavior": "Word מאפשר גרירה עד סמוך לשוליים",
+      "code_evidence": "const FREE_MARGIN_CM = 1.0;",
+      "fix_suggestion": "const FREE_MARGIN_CM = 0.5;"
+    },
+    {
+      "id": "BUG-02",
+      "title": "Undo מקפיץ לסוף הדף",
+      "severity": "high",
+      "location": "restore() בתוך initUndoHistory — שורה 10618",
+      "description": "אחרי restore, קוד מגדיר סמן לסוף המסמך: r.collapse(false). אין שמירה ושחזור scrollTop.",
+      "word_behavior": "Word שומר מיקום סמן ב-undo ומחזיר אליו",
+      "code_evidence": "r.collapse(false); // ← תמיד קופץ לסוף",
+      "fix_suggestion": "שמור scrollTop לפני restore והחזר אחריו ב-rAF. שמור גם Range snapshot."
+    },
+    {
+      "id": "BUG-03",
+      "title": "below-text חסר מ-IMG_MODES",
+      "severity": "medium",
+      "location": "שורה 6542",
+      "description": "IMG_MODES = ['free','above-text','float-right','float-left','inline','behind']. below-text נעלם. יש קוד מת: if (mode === 'below-text') mode = 'behind'.",
+      "word_behavior": "Word מפריד בין below-text (z-index חיובי נמוך) לבין behind (z=-1)",
+      "code_evidence": "IMG_MODES = ['free','above-text','float-right','float-left','inline','behind']",
+      "fix_suggestion": "הוסף 'below-text' עם z-index:1 (לפני 'behind'), שנה קוד _setImgMode."
+    },
+    {
+      "id": "BUG-04",
+      "title": "תמונה inline — ממוקמת בין פסקאות, לא בשורה",
+      "severity": "high",
+      "location": "_setImgMode שורה 6706",
+      "description": "מצב inline קורא ל-_placeFloatInFlow() — פונקציית float. התמונה מוכנסת כ-ילד ישיר של editor, לא בתוך שורה. הטקסט לא עוטף.",
+      "word_behavior": "תמונה inline נכנסת לתוך שורת הטקסט כ-inline-block — הטקסט ממשיך אחריה",
+      "code_evidence": "_placeFloatInFlow(obj) // ← float, לא inline",
+      "fix_suggestion": "השתמש ב-insertNode עם img כ-inline-block בתוך Range הנוכחי, לא _placeFloatInFlow."
+    },
+    {
+      "id": "BUG-05",
+      "title": "גרירת עמודת טבלה — שגיאת RTL בחישוב colB",
+      "severity": "medium",
+      "location": "שורה 10208",
+      "description": "if (hit.edge === 'left') { colA = idx; colB = idx - 1; } — בRTL, idx-1 הוא השכן הויזואלי הימני, לא השמאלי. עמודה שגויה מתרחבת.",
+      "word_behavior": "Word מחשב גרירת עמודה נכון ב-RTL",
+      "code_evidence": "colB = idx - 1; // RTL-unaware",
+      "fix_suggestion": "בדוק dir של הטבלה. ב-RTL: edge=left → colB = idx+1."
+    },
+    {
+      "id": "BUG-06",
+      "title": "קריין: voiceFor מחזיר קול לא-תואם-שפה",
+      "severity": "high",
+      "location": "voiceFor() שורה 11629",
+      "description": "return voices.find(v => v.lang.startsWith(langCode)) || chosen || null — chosen מוחזר גם כשאינו תואם השפה. קול אנגלי קורא עברית.",
+      "word_behavior": "Word תמיד מקצה קול לפי שפת הטקסט",
+      "code_evidence": "|| chosen || null",
+      "fix_suggestion": "הסר || chosen. החזר null אם אין קול תואם."
+    },
+    {
+      "id": "BUG-07",
+      "title": "Delete לא עובד תמיד — תלוי בפוקוס",
+      "severity": "medium",
+      "location": "שורה 9763",
+      "description": "כשלוחצים כפתור בסרגל, פוקוס עובר מהאובייקט לכפתור. selectedObj() עדיין מחזיר האובייקט אך Delete לא מופעל.",
+      "word_behavior": "Word תמיד מוחק אובייקט נבחר בלחיצת Delete",
+      "code_evidence": "if (editingText(o)) return; // ← לפעמים false negative",
+      "fix_suggestion": "בקש keydown listener על document (לא editor) לDelete/Backspace — אם יש selectedObj() ולא editingText, מחק."
+    },
+    {
+      "id": "BUG-08",
+      "title": "Enter ברשימה ממוספרת — לא ניתן לצאת",
+      "severity": "medium",
+      "location": "אין מאזין Enter ל-LI",
+      "description": "הקוד מאזין רק ל-Space לזיהוי רשימות אוטומטיות. אין override ל-Enter ברשימות. Enter כפול לא יוצא מהרשימה.",
+      "word_behavior": "Enter בשורה ריקה ברשימה = יציאה מהרשימה",
+      "code_evidence": "אין handler ל-keydown Enter ב-LI",
+      "fix_suggestion": "הוסף: אם Enter ו-LI ריק → יצא מרשימה (insertParagraph + outdent)."
+    },
+    {
+      "id": "BUG-09",
+      "title": "בחירה מרובה — תפריט קיים נמחק",
+      "severity": "medium",
+      "location": "buildMulti() שורה 9445",
+      "description": "clearBar() מוחק כל הכפתורים. כשנבחרו תיבות טקסט — אין גישה לצבע/מסגרת/עיצוב.",
+      "word_behavior": "Word שומר כלים רלוונטיים בבחירה מרובה",
+      "code_evidence": "clearBar(); // ← מוחק הכל",
+      "fix_suggestion": "אל תמחק — הוסף כפתורי multi-select לסרגל הקיים. אחרי ביטול בחירה, חזור למצב רגיל."
+    },
+    {
+      "id": "BUG-10",
+      "title": "'חפיפה' בתפריט ראשי — לא קיים",
+      "severity": "low",
+      "location": "ribbon insert",
+      "description": "אין כפתור חפיפה ב-ribbon. הכפתור ⧉ קיים רק ב-buildMulti() (סרגל צף בחירה מרובה).",
+      "word_behavior": "Word: Format → Arrange → Bring Forward/Send Backward",
+      "code_evidence": "buildMulti() → btn ⧉",
+      "fix_suggestion": "הסבר בUI: כפתור ⧉ מופיע רק כשמסמנים כמה אובייקטים. ניתן להוסיף לRibbon Insert."
+    },
+    {
+      "id": "BUG-11",
+      "title": "תמונה 'מאחורי הטקסט' — לא ניתנת ללחיצה",
+      "severity": "high",
+      "location": "_setImgMode שורה 6710",
+      "description": "z-index: -1 שם את התמונה מתחת ל-contenteditable. לא ניתן ללחוץ עליה. הקוד מנסה להרים ל-z=25 בבחירה — אך אי אפשר לבחור.",
+      "word_behavior": "Word מאפשר לחיצה על תמונת watermark עם Ctrl+Click",
+      "code_evidence": "obj.style.zIndex = '-1'; // → לא ניתן ללחוץ",
+      "fix_suggestion": "הוסף overlay שקוף מעל behind-images. לחיצה על overlay → בחר התמונה מאחוריו."
+    },
+    {
+      "id": "BUG-12",
+      "title": "בחירת 2+ אובייקטים — אין Shift+Click",
+      "severity": "high",
+      "location": "addMultiBtn() שורה 8860",
+      "description": "הדרך היחידה לבחור כמה אובייקטים: לחץ 'בחר כמה' → לחץ כל אחד בנפרד. אין Shift+Click.",
+      "word_behavior": "Word: Shift+Click מוסיף לבחירה, גרירה = rubber-band selection",
+      "code_evidence": "addMultiBtn() // ← כפתור בלבד, אין keyboard modifier",
+      "fix_suggestion": "הוסף: Shift+Click על free-obj → הוסף ל-_multiSel[]."
+    },
+    {
+      "id": "BUG-13",
+      "title": "'אפשרויות נוספות' בתיבת טקסט — כפל פונקציות",
+      "severity": "low",
+      "location": "buildTextbox() שורה 9020",
+      "description": "moreBtn מכיל מודגש/נטוי/קו תחתון/מרקר/יישורים — כולם קיימים בסרגל הבית. כפילות.",
+      "word_behavior": "Word: floating toolbar קומפקטי ללא כפילות",
+      "code_evidence": "moreBtn → B/I/U/marker/align",
+      "fix_suggestion": "מחק את moreBtn לגמרי. הסרגל הצף של תיבת טקסט יציג רק: שקיפות, מסגרת, מחיקה."
+    },
+    {
+      "id": "BUG-14",
+      "title": "גבולות תנועה לא אחידים: תמונה 2.5cm vs צורה 1cm",
+      "severity": "medium",
+      "location": "_clamp() שורה 6147",
+      "description": "margin = (_isImg ? 2.5 : FREE_MARGIN_CM) * ppc — תמונות 2.5cm, שאר 1cm. לא עקבי.",
+      "word_behavior": "Word: אותה מגבלה לכל האובייקטים (שוליים הדף)",
+      "code_evidence": "const margin = (_isImg(obj) ? 2.5 : FREE_MARGIN_CM) * ppc;",
+      "fix_suggestion": "שנה ל-FREE_MARGIN_CM עבור כולם (אחרי תיקון BUG-01 ל-0.5). אם רוצים 0 — הסר clamp לתמונה."
+    },
+    {
+      "id": "BUG-15",
+      "title": "צבע רקע טבלה שלמה — חסר",
+      "severity": "medium",
+      "location": "buildTable() שורה 9268",
+      "description": "יש צבע רקע לתא בלבד. אין שינוי לכל הטבלה/לשורה נבחרת.",
+      "word_behavior": "Word: Table Design → Table Styles + Shading לכל הטבלה/שורה/עמודה",
+      "code_evidence": "openBorderPanel — גבולות בלבד",
+      "fix_suggestion": "הוסף כפתור 'צבע רקע' ב-buildTable() שמחיל על table background-color."
+    },
+    {
+      "id": "BUG-16",
+      "title": "כפתור 'בחר' בסרגל טבלה — לא ברור מה עושה",
+      "severity": "low",
+      "location": "buildTable() שורה 9297",
+      "description": "כפתור 'בחר' פותח tblSelBar — לא מוסבר אפשרויות. Tooltip חסר.",
+      "word_behavior": "Word: Select Table / Select Row / Select Column",
+      "code_evidence": "btn 'בחר' → tblSelBar.style.display",
+      "fix_suggestion": "הוסף tooltip: 'בחר שורה/עמודה/טבלה'. הוסף כפתורים ברורים."
+    },
+    {
+      "id": "BUG-17",
+      "title": "קריין עברי: קולות 'iw-IL' לא מזוהים",
+      "severity": "critical",
+      "location": "voiceFor() שורה 11629",
+      "description": "החיפוש v.lang.startsWith('he') לא מוצא קולות עבריים עם iw-IL (Chrome/Edge ישן). תוצאה: קריין אנגלי קורא עברית.",
+      "word_behavior": "קריאה תקינה בעברית",
+      "code_evidence": "voices.find(v => v.lang.startsWith('he'))",
+      "fix_suggestion": "v.lang.startsWith('he') || v.lang.startsWith('iw') || v.lang === 'iw-IL'"
+    },
+    {
+      "id": "BUG-18",
+      "title": "שינוי קול קריין לא משפיע על הקראה פעילה",
+      "severity": "medium",
+      "location": "initSpeak() — prefs",
+      "description": "utterances שנשלחו ל-speechSynthesis.speak() לא ניתנות לשינוי. שינוי קול תוך כדי הקראה = ממשיך הקול הישן.",
+      "word_behavior": "N/A",
+      "code_evidence": "speechSynthesis.speak(utt) // ← לא ניתן לשנות",
+      "fix_suggestion": "הוסף: אם קורא, עצור (speechSynthesis.cancel()) ואז המשך עם הקול החדש."
+    }
+  ],
+
+  "design_issues": [
+    {
+      "id": "DESIGN-01",
+      "title": "below-text ו-behind מאוחדים",
+      "description": "המשתמש מבקש הפרדה. below-text = z-index:1 (מתחת לטקסט אך ניתן ללחיצה). behind = z-index:-1."
+    },
+    {
+      "id": "DESIGN-02",
+      "title": "מרווח גרירה 1cm לא מוסבר",
+      "description": "המשתמש לא יודע שיש מגבלה. הוסף tooltip/אינדיקטור ויזואלי."
+    },
+    {
+      "id": "DESIGN-03",
+      "title": "בחירת עמודה — אין גישה לעיצוב טקסט",
+      "description": "כשמסמנים עמודה ב-tblSelBar, אין צבע טקסט/גודל גופן."
+    },
+    {
+      "id": "DESIGN-04",
+      "title": "פנל גבולות לא נגיש מ-tblSelBar",
+      "description": "openBorderPanel זמין רק מתא בודד. צריך גם בבחירת שורה/עמודה."
+    }
+  ],
+
+  "working_correctly": [
+    "גרירת עמודת טבלה — מנגנון בסיסי תקין (adjW - delta)",
+    "_clamp נקרא ב-mousemove — מניעת חריגה בזמן גרירה",
+    "אחד (union) צורות SVG — mergeSelectedShapes עובד עם SVG bbox",
+    "חיתוך/חפיפה SVG — combineSelectedShapes עם mask דינמי",
+    "שמירת אובייקטים — _serializeFreeObjs/_deserializeFreeObjs כוללים imgMode",
+    "מערכת Undo snapshot (250 צעדים) — הלוגיקה עצמה תקינה",
+    "פנל גבולות טבלה — openBorderPanel ממש צבע+עובי+סגנון",
+    "שקיפות אובייקטים — ctx-opacity עובד",
+    "prefs קריין נשמרים ב-localStorage"
+  ]
+}

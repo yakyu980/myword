@@ -1,0 +1,35 @@
+import { _electron as electron } from 'playwright';
+import path from 'path'; import fs from 'fs'; import os from 'os';
+import { fileURLToPath } from 'url';
+const __dirname=path.dirname(fileURLToPath(import.meta.url));
+const EXE=path.resolve(__dirname,'..','desktop','dist','win-unpacked','MyWord.exe');
+const say=(n,v,d='')=>console.log(`${v?'✅':'❌'} ${n}${d?'  ['+d+']':''}`);
+const tmp=fs.mkdtempSync(path.join(os.tmpdir(),'mwpkg-'));
+console.log('מריץ את ה-EXE הארוז:', EXE);
+const app=await electron.launch({ executablePath: EXE, args: [] });
+const win=await app.firstWindow();
+const errs=[]; win.on('pageerror',e=>errs.push(e.message));
+win.on('console',m=>{if(m.type()==='error')errs.push(m.text());});
+await win.waitForSelector('#editor',{timeout:40000});
+await win.waitForTimeout(2000);
+say('התוכנה הארוזה עולה', true, await win.title());
+say('העורך והריבונים נטענו', await win.evaluate(()=>!!document.getElementById('editor')&&document.querySelectorAll('.ribbon').length>0));
+const sec=await win.evaluate(()=>({req:typeof window.require,proc:typeof window.process,br:typeof window.mwDesktop}));
+say('בידוד אבטחה נשמר בארוז', sec.req==='undefined'&&sec.proc==='undefined'&&sec.br==='object', JSON.stringify(sec));
+// עריכה אמיתית + עימוד
+await win.evaluate(()=>{ document.getElementById('editor').innerHTML=Array.from({length:80},(_,i)=>`<p>שורה ${i+1}</p>`).join(''); window.updatePagination&&window.updatePagination(); });
+await win.waitForTimeout(1500);
+const pages=await win.evaluate(()=>document.querySelectorAll('.page-number').length);
+say('עימוד עובד בארוז', pages>=3, pages+' עמודים');
+// שמירה אמיתית
+const out=path.join(tmp,'ארוז.mwd');
+await app.evaluate(async({dialog},p)=>{dialog.showSaveDialog=async()=>({canceled:false,filePath:p});},out);
+await win.evaluate(()=>{document.getElementById('docTitle').value='ארוז';});
+await win.evaluate(()=>window.saveDocToComputer(true));
+await win.waitForTimeout(1500);
+say('שמירה לדיסק מהתוכנה הארוזה', fs.existsSync(out), out);
+if(fs.existsSync(out)) say('הקובץ תקין', fs.readFileSync(out,'utf8').includes('שורה 1'), fs.statSync(out).size+' בתים');
+console.log('שגיאות: '+errs.length);
+errs.slice(0,5).forEach(e=>console.log('  ⚠ '+String(e).slice(0,140)));
+await app.close();
+fs.rmSync(tmp,{recursive:true,force:true});

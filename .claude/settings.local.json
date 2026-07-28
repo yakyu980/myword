@@ -1,0 +1,35 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__Claude_in_Chrome__computer",
+      "mcp__Claude_in_Chrome__navigate",
+      "mcp__Claude_in_Chrome__tabs_close_mcp",
+      "mcp__Claude_in_Chrome__tabs_context_mcp",
+      "Bash(python -m http.server 8765)",
+      "Bash(where py *)",
+      "Bash(where node *)",
+      "Bash(where powershell *)",
+      "Bash(node -e \"const http=require\\('http'\\),fs=require\\('fs'\\),path=require\\('path'\\);http.createServer\\(\\(req,res\\)=>{const f=path.join\\(process.cwd\\(\\),decodeURIComponent\\(req.url.split\\('?'\\)[0]\\)\\);try{const d=fs.readFileSync\\(f\\);res.writeHead\\(200,{'Content-Type':f.endsWith\\('.html'\\)?'text/html;charset=utf-8':'text/plain'}\\);res.end\\(d\\);}catch\\(e\\){res.writeHead\\(404\\);res.end\\('404'\\);}}\\).listen\\(8765,\\(\\)=>console.log\\('Server on 8765'\\)\\);\")",
+      "mcp__Claude_in_Chrome__javascript_tool",
+      "Bash(grep -l \"myword\" \"/c/Users/yakyu/AppData/Local/Microsoft/Edge/User Data/Default/Local Storage/leveldb/\"*.ldb \"/c/Users/yakyu/AppData/Local/Microsoft/Edge/User Data/Default/Local Storage/leveldb/\"*.log 2>/dev/null)",
+      "Bash(node -e ' *)",
+      "Bash(node _dump.js)",
+      "Bash(node _recover.js)",
+      "Bash(npm install *)",
+      "Bash(node _inject.js)",
+      "Bash(cd \"/c/Users/yakyu/OneDrive/文档/WONDER LETER\" && ls node_modules 2>/dev/null | head -3)",
+      "mcp__Claude_in_Chrome__browser_batch",
+      "Bash(pkill -f \"npx serve\")",
+      "Bash(timeout 60 npx serve -p 3001)",
+      "mcp__Claude_Preview__preview_start",
+      "Bash(python3 -c ' *)",
+      "PowerShell($f = \"C:\\\\Users\\\\yakyu\\\\OneDrive\\\\文档\\\\WONDER LETER\\\\MyWord-v2.html\"; Write-Output \\(\"Size: \" + \\(Get-Item $f\\).Length\\); $c = Get-Content $f; Write-Output \\(\"Lines: \" + $c.Count\\))",
+      "PowerShell($f = \"C:\\\\Users\\\\yakyu\\\\OneDrive\\\\文档\\\\WONDER LETER\\\\MyWord-v2.html\"; Select-String -Path $f -Pattern \"selectObj\",\"<script\",\"function _clamp\",\"res-h\",\".rot\" | ForEach-Object { \"$\\($_.LineNumber\\): $\\($_.Line.Substring\\(0,[Math]::Min\\(100,$_.Line.Length\\)\\)\\)\" } | Select-Object -First 40)",
+      "Bash(cp \"C:\\\\Users\\\\yakyu\\\\OneDrive\\\\文档\\\\WONDER LETER\\\\MyWord-v2.html\" /tmp/mw.html)",
+      "Read(//tmp/**)",
+      "PowerShell($f=\"C:\\\\Users\\\\yakyu\\\\OneDrive\\\\文档\\\\WONDER LETER\\\\MyWord-v2.html\"; $c=Get-Content $f -Raw; $in=$false; $sb=New-Object System.Text.StringBuilder; foreach\\($line in \\(Get-Content $f\\)\\){ if\\($line -match '^<script>'\\){$in=$true;continue}; if\\($line -match '^</script>'\\){$in=$false}; if\\($in\\){[void]$sb.AppendLine\\($line\\)} }; Set-Content -Path \"C:\\\\Users\\\\yakyu\\\\myword.js\" -Value $sb.ToString\\(\\) -Encoding utf8; node --check \"C:\\\\Users\\\\yakyu\\\\myword.js\"; if\\($?\\){\"SYNTAX_OK\"}else{\"SYNTAX_FAIL\"})",
+      "Bash(node -e \"const fs=require\\('fs'\\);const h=fs.readFileSync\\('MyWord-v2.html','utf8'\\);const matches=[];let i=0;while\\(\\(i=h.indexOf\\('אתחול',i\\)\\)>=0\\){matches.push\\(i\\);i++;}console.log\\('all אתחול positions:', matches.slice\\(0,10\\)\\);\")",
+      "Bash(npm run *)"
+    ]
+  }
+}

@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Feature Verification Test</title>
+<style>
+body { font-family: Arial; padding: 20px; background: #f0f0f0; }
+.test { background: white; margin: 20px 0; padding: 15px; border-radius: 5px; }
+.pass { background: #d4edda; color: #155724; }
+.fail { background: #f8d7da; color: #721c24; }
+.info { background: #d1ecf1; color: #0c5460; }
+h2 { margin-top: 0; }
+pre { background: #333; color: #0f0; padding: 10px; border-radius: 3px; overflow-x: auto; font-size: 11px; }
+</style>
+</head>
+<body>
+<h1>Feature Verification Report</h1>
+<div id="results"></div>
+
+<script src="MyWord-v2.html" type="module"></script>
+
+<script>
+async function runTests() {
+  const results = document.getElementById('results');
+  
+  // Wait for page to load
+  await new Promise(r => setTimeout(r, 2000));
+  
+  // Test 1: Goal Progress Bar
+  const test1 = document.createElement('div');
+  test1.className = 'test';
+  
+  try {
+    const editor = document.getElementById('editor');
+    const status = document.querySelector('.status .left');
+    
+    if (!editor || !status) throw new Error('Editor or status bar not found');
+    
+    // Set a test doc ID
+    window.currentDocId = 'test-' + Date.now();
+    
+    // Add some content
+    editor.innerHTML = '<p>This is a test with many words in it to count properly for the goal progress bar feature</p>';
+    
+    // Trigger updateGoalProgress to set a goal
+    window._setGoal(50);
+    
+    // Wait for update
+    await new Promise(r => setTimeout(r, 700));
+    
+    const goalEl = document.getElementById('goalProgress');
+    const testDiv = document.createElement('div');
+    
+    if (goalEl && goalEl.parentElement === status) {
+      testDiv.className = 'test pass';
+      testDiv.innerHTML = '<h2>✓ Test 1: Goal Progress Bar</h2>'
+        + '<p>Element created and appended to status bar correctly</p>'
+        + '<p><strong>HTML:</strong></p>'
+        + '<pre>' + escapeHtml(goalEl.outerHTML) + '</pre>'
+        + '<p>Word count works: ' + goalEl.textContent.includes('/')  + '</p>';
+    } else {
+      testDiv.className = 'test fail';
+      testDiv.innerHTML = '<h2>✗ Test 1: Goal Progress Bar</h2>'
+        + '<p>Element not found or not in correct parent</p>'
+        + '<p>Found: ' + (goalEl ? 'YES' : 'NO') + '</p>'
+        + '<p>Parent correct: ' + (goalEl?.parentElement === status ? 'YES' : 'NO') + '</p>';
+    }
+    results.appendChild(testDiv);
+  } catch (e) {
+    const testDiv = document.createElement('div');
+    testDiv.className = 'test fail';
+    testDiv.innerHTML = '<h2>✗ Test 1: Goal Progress Bar</h2><p>ERROR: ' + e.message + '</p>';
+    results.appendChild(testDiv);
+  }
+  
+  // Test 2: Presentation Slide Count  
+  const test2 = document.createElement('div');
+  test2.className = 'test';
+  
+  try {
+    const editor = document.getElementById('editor');
+    
+    // Create content with 2 H1 headings
+    editor.innerHTML = '<h1>Heading 1</h1><p>Content under heading 1</p>'
+      + '<h1>Heading 2</h1><p>Content under heading 2</p>';
+    
+    // Trigger presentation start
+    window.startPresentation();
+    
+    await new Promise(r => setTimeout(r, 500));
+    
+    const counter = document.querySelector('.preso-counter');
+    const preso = document.getElementById('presoOverlay');
+    
+    const testDiv = document.createElement('div');
+    
+    if (preso && counter) {
+      const counterText = counter.textContent;
+      const match = counterText.match(/(\d+)\s*\/\s*(\d+)/);
+      const [, current, total] = match || [null, '?', '?'];
+      
+      if (total === '2') {
+        testDiv.className = 'test pass';
+        testDiv.innerHTML = '<h2>✓ Test 2: Presentation Slide Count</h2>'
+          + '<p>Slide counter created and shows correct count</p>'
+          + '<p><strong>Counter text:</strong> ' + escapeHtml(counterText) + '</p>'
+          + '<p>Expected 2 slides (2 H1s), got: ' + total + '</p>';
+      } else {
+        testDiv.className = 'test fail';
+        testDiv.innerHTML = '<h2>⚠ Test 2: Presentation Slide Count</h2>'
+          + '<p>Counter exists but count may be unexpected</p>'
+          + '<p><strong>Counter text:</strong> ' + escapeHtml(counterText) + '</p>'
+          + '<p>Expected 2 slides, got: ' + total + ' (this might be correct depending on empty-paragraph handling)</p>';
+      }
+    } else {
+      testDiv.className = 'test fail';
+      testDiv.innerHTML = '<h2>✗ Test 2: Presentation Slide Count</h2>'
+        + '<p>Presentation overlay or counter not found</p>'
+        + '<p>Overlay: ' + (preso ? 'YES' : 'NO') + '</p>'
+        + '<p>Counter: ' + (counter ? 'YES' : 'NO') + '</p>';
+    }
+    
+    // Close presentation
+    preso?.remove();
+    
+    results.appendChild(testDiv);
+  } catch (e) {
+    const testDiv = document.createElement('div');
+    testDiv.className = 'test fail';
+    testDiv.innerHTML = '<h2>✗ Test 2: Presentation Slide Count</h2><p>ERROR: ' + e.message + '</p>';
+    results.appendChild(testDiv);
+  }
+}
+
+function escapeHtml(text) {
+  const map = {
+    '&': '&amp;',
+    '<': '&lt;',
+    '>': '&gt;',
+    '"': '&quot;',
+    "'": '&#039;'
+  };
+  return text.replace(/[&<>"']/g, m => map[m]);
+}
+
+// Start tests
+runTests().catch(e => {
+  const div = document.createElement('div');
+  div.className = 'test fail';
+  div.innerHTML = '<h2>Test Suite Error</h2><p>' + e.message + '</p>';
+  document.getElementById('results').appendChild(div);
+});
+</script>
+</body>
+</html>

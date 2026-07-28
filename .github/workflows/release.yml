@@ -1,0 +1,80 @@
+# בונה את MyWord ל-Windows, macOS ו-Linux ומפרסם את הקבצים ל-GitHub Release.
+# הפעלה: צור תג גרסה ודחוף אותו —
+#   git tag v2.0.0 && git push origin v2.0.0
+# בסיום יופיע עמוד Release עם קישורי הורדה לכל מערכת הפעלה.
+name: Release
+
+on:
+  push:
+    tags: ['v*']
+  workflow_dispatch:        # אפשר גם להריץ ידנית מלשונית Actions
+
+permissions:
+  contents: write           # דרוש כדי ליצור Release
+
+jobs:
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: windows-latest
+            name: Windows
+          - os: macos-latest      # מריץ על Apple Silicon — בונה גם x64 וגם arm64
+            name: macOS
+          - os: ubuntu-latest
+            name: Linux
+    runs-on: ${{ matrix.os }}
+    name: בנייה — ${{ matrix.name }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+          cache-dependency-path: desktop/package-lock.json
+
+      - name: התקנת תלויות
+        working-directory: desktop
+        run: npm ci
+
+      - name: יצירת אייקונים
+        working-directory: desktop
+        run: node make-icon.mjs
+
+      # בדחיפת תג — בונה ומפרסם ל-Release.
+      # בהרצה ידנית (workflow_dispatch) אין תג, ולכן רק בונים בלי לפרסם —
+      # אחרת electron-builder נכשל כשאין יעד פרסום.
+      - name: בנייה ואריזה
+        working-directory: desktop
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # ⚠️ בלי תעודת מפתח של אפל, electron-builder מנסה לזהות זהות-חתימה
+          # ב-Keychain של הראנר ונכשל. הדגל הזה מכבה את החיפוש ומייצר בנייה
+          # לא-חתומה תקינה (המשתמש יעשה קליק-ימני → Open בפעם הראשונה).
+          CSC_IDENTITY_AUTO_DISCOVERY: false
+          # לחתימה אמיתית: הוסף את שני ה-Secrets והסר את ההערות —
+          # CSC_LINK: ${{ secrets.MAC_CERT_P12 }}
+          # CSC_KEY_PASSWORD: ${{ secrets.MAC_CERT_PASSWORD }}
+        shell: bash
+        run: |
+          npm run sync
+          if [ "${{ github.ref_type }}" = "tag" ]; then
+            npx electron-builder --publish always
+          else
+            npx electron-builder --publish never
+          fi
+
+      - name: שמירת הקבצים כ-artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: MyWord-${{ matrix.name }}
+          path: |
+            desktop/dist/*.exe
+            desktop/dist/*.dmg
+            desktop/dist/*.zip
+            desktop/dist/*.AppImage
+            desktop/dist/*.deb
+          if-no-files-found: warn
