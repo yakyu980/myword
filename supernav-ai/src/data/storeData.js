@@ -14,10 +14,17 @@ function nextBarcode() {
   return '729' + String(_nextBarcode++).padStart(10, '0');
 }
 
-function product(deptId, name, shelf, zone, price, category, salePercent) {
+function product(deptId, name, shelf, zone, price, category, salePercent, realBarcode) {
   return {
     id: 'p' + _nextId++,
-    barcode: nextBarcode(),
+    // ברקוד-אמיתי (אם סופק) מאפשר תמונה/שם-רשמי אמיתיים דרך
+    // Open Food Facts (ר' productEnrichment.js) — לא רק סריקה-מדומה.
+    barcode: realBarcode || nextBarcode(),
+    // דגל-מפורש (לא ניחוש-לפי-קידומת — 729 הוא גם קידומת-GS1 אמיתית
+    // של ישראל, אז אי-אפשר להבחין "אמיתי מול מדומה" רק לפי המספר):
+    // בלעדיו, ProductPhoto לא ינסה בכלל לפנות ל-Open Food Facts —
+    // כדי לא לשגר פנייה-חיצונית-מיותרת על כל אחד מ-37 מוצרי-הדוגמה.
+    hasRealBarcode: !!realBarcode,
     department: deptId,
     name,
     shelf,
@@ -77,6 +84,11 @@ export const PRODUCTS = [
 
   // חטיפים וממתקים
   product('snacks', 'שוקולד חלב', 1, 4, 6.9, 'שוקולד'),
+  // ⚠️ ברקוד-אמיתי (לא מומצא) — קידומת-EAN איטלקית 8000500-סטנדרטית,
+  // מזוהה נרחבות כדוגמת-לימוד לממריחת-נוטלה 350 גרם. לא נבדק חי מכאן
+  // (openfoodfacts.org חסום ברשת-הסביבה-הזו) — יש לוודא בפריסה אמיתית
+  // שהתמונה/שם שחוזרים מ-Open Food Facts אכן תואמים לפני-שסומכים-עליו.
+  product('snacks', 'ממרח נוטלה 350 גרם', 1, 11, 24.9, 'ממרחים', null, '3017620422003'),
   product('snacks', 'ביסלי', 1, 10, 5.5, 'חטיפים מלוחים'),
   product('snacks', 'עוגיות אוראו', 2, 15, 9.9, 'עוגיות'),
   product('snacks', 'קטשופ', 3, 6, 11.9, 'רטבים', 15),

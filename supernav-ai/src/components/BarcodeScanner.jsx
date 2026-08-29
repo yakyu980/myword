@@ -161,6 +161,13 @@ export default function BarcodeScanner({ onAdd, onClose }) {
               <>
                 {result.externalProduct ? (
                   <p className="barcode-not-found">
+                    {result.externalProduct.imageUrl && (
+                      <img
+                        className="product-photo"
+                        src={result.externalProduct.imageUrl}
+                        alt={result.externalProduct.name}
+                      />
+                    )}
                     <Icon name="check" /> זוהה כ-"{result.externalProduct.name}"
                     {result.externalProduct.brand ? ` (${result.externalProduct.brand})` : ''} — ברקוד אמיתי
                     (Open Food Facts), אבל <strong>לא בקטלוג של הסניף הזה</strong> (אין לו מחיר/מיקום-מדף

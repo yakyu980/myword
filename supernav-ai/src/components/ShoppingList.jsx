@@ -13,7 +13,7 @@ import TripVenuePicker from './TripVenuePicker';
 import FavoritesManager from './FavoritesManager';
 import PriceTag from './PriceTag';
 import Icon from './Icon';
-import DeptIcon from './DeptIcon';
+import ProductPhoto from './ProductPhoto';
 
 export default function ShoppingList({ list, onGoNavigate }) {
   const { items, addItem, removeItem, assignItem, clear } = list;
@@ -126,7 +126,7 @@ export default function ShoppingList({ list, onGoNavigate }) {
               return (
                 <li className="cart-row" key={item.id}>
                   <span className="cart-row-icon">
-                    <DeptIcon dept={dept} />
+                    <ProductPhoto product={item} dept={dept} />
                   </span>
                   <button
                     className="cart-row-info cart-row-info--btn"

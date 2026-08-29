@@ -9,6 +9,7 @@ import { api } from '../lib/apiClient';
 import PriceTag from './PriceTag';
 import Icon from './Icon';
 import DeptIcon from './DeptIcon';
+import ProductPhoto from './ProductPhoto';
 import CloseButton from './CloseButton';
 
 export default function ProductDetail({ product, onClose, onAdd, onSwap }) {
@@ -105,6 +106,9 @@ export default function ProductDetail({ product, onClose, onAdd, onSwap }) {
     <div className="modal-backdrop" onClick={onClose}>
       <div className="modal" onClick={(e) => e.stopPropagation()}>
         <CloseButton onClick={onClose} />
+        <div className="product-detail-photo-wrap">
+          <ProductPhoto product={product} dept={dept} className="product-detail-photo" />
+        </div>
         <h2>{product.name}</h2>
         <p className="modal-location">
           <DeptIcon dept={dept} /> {dept.name} · {locationLabel(product)}
@@ -245,7 +249,7 @@ export default function ProductDetail({ product, onClose, onAdd, onSwap }) {
                   <li key={alt.id} className="candidate-row">
                     <span className="candidate-btn candidate-btn--static">
                       <span className="candidate-icon">
-                        <DeptIcon dept={altDept} />
+                        <ProductPhoto product={alt} dept={altDept} />
                       </span>
                       <span className="candidate-info">
                         <span className="candidate-name">{alt.name}</span>

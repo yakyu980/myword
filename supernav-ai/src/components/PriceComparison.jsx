@@ -10,7 +10,7 @@ import PriceTag from './PriceTag';
 import ProductDetail from './ProductDetail';
 import ReceiptScanner from './ReceiptScanner';
 import Icon from './Icon';
-import DeptIcon from './DeptIcon';
+import ProductPhoto from './ProductPhoto';
 
 function ProductRow({ product, onOpen }) {
   const dept = getDepartment(product.department);
@@ -18,7 +18,7 @@ function ProductRow({ product, onOpen }) {
   return (
     <li className="compare-row" onClick={() => onOpen(product)}>
       <span className="compare-icon">
-        <DeptIcon dept={dept} />
+        <ProductPhoto product={product} dept={dept} />
       </span>
       <span className="compare-info">
         <span className="compare-name">{product.name}</span>

@@ -2276,3 +2276,27 @@
   border-radius: 999px;
   flex: 0 0 auto;
 }
+
+/* תמונת-מוצר אמיתית (מ-Open Food Facts, לפי ברקוד-אמיתי-מאומת בלבד —
+   ר' productEnrichment.js) — נופלת ל-DeptIcon (אייקון-מחלקה) אם אין. */
+.product-photo {
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+  border-radius: 6px;
+  background: var(--surface);
+  flex-shrink: 0;
+}
+
+.product-detail-photo-wrap {
+  display: flex;
+  justify-content: center;
+  margin: 4px 0 8px;
+}
+
+.product-detail-photo-wrap .product-photo {
+  width: 120px;
+  height: 120px;
+  border-radius: 14px;
+  border: 1px solid var(--border);
+}

@@ -5,7 +5,7 @@ import { useSpeechRecognition } from '../lib/useSpeechRecognition';
 import ProductDetail from './ProductDetail';
 import PriceTag from './PriceTag';
 import Icon from './Icon';
-import DeptIcon from './DeptIcon';
+import ProductPhoto from './ProductPhoto';
 
 export default function ProductSearch({ onAdd, listedIds }) {
   const [query, setQuery] = useState('');
@@ -50,7 +50,7 @@ export default function ProductSearch({ onAdd, listedIds }) {
             <li className="product-row" key={p.id}>
               <button className="product-row-main" onClick={() => setSelected(p)}>
                 <span className="product-row-icon">
-                  <DeptIcon dept={dept} />
+                  <ProductPhoto product={p} dept={dept} />
                 </span>
                 <span className="product-row-info">
                   <span className="product-row-name">{p.name}</span>
