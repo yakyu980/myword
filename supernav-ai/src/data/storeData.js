@@ -2,6 +2,8 @@
 // רשת) עברו ל-src/lib/storeConfig.js — שם ניתן לעריכה ע"י המשתמש;
 // כאן נשאר רק הקטלוג הקבוע.
 
+import { fuzzyIncludes } from '../lib/fuzzyMatch.js';
+
 // כל מדף מחולק ל-15 אזורים: 5 עמודות × 3 שורות (לפי הספסיפיקציה).
 export const SHELF_COLS = 5;
 export const SHELF_ROWS = 3;
@@ -103,10 +105,11 @@ export function getProductByBarcode(code) {
   return PRODUCTS.find((p) => p.barcode === code.trim());
 }
 
+// טולרנטי-לשגיאות-הקלדה (fuzzyIncludes) — לדוגמה "נוטה" ימצא "נוטלה".
 export function searchProducts(query) {
-  const q = query.trim().toLowerCase();
+  const q = query.trim();
   if (!q) return [];
-  return PRODUCTS.filter((p) => p.name.toLowerCase().includes(q));
+  return PRODUCTS.filter((p) => fuzzyIncludes(p.name, q));
 }
 
 // מיקום קריא: "מדף 4, אזור 8"
